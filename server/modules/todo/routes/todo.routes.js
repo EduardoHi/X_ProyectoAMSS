@@ -11,7 +11,8 @@ router.route(MODULE_PATH + '/')
 
 router.route(MODULE_PATH + '/:todoId')
     .get(todoController.getTodo)
-    .put(todoController.updateTodo);
+    .put(todoController.updateTodo)
+    .delete(todoController.deleteTodo);
 
 router.param('todoId', todoController.getTodoById);
 

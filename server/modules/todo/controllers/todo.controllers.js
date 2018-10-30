@@ -4,7 +4,7 @@ const TodoAccess = require('../dataAccess/todo.access')
 
 exports.createTodo = async (req, res) => {
     try {
-        let todo = await TodoAccess.createTodo(req.body)
+        let todo = await TodoAccess.create(req.body)
         res.send(todo)
     } catch (err) {
         console.log(err)
@@ -14,7 +14,7 @@ exports.createTodo = async (req, res) => {
 
 exports.getAllTodos = async (req, res) => {
     try {
-        let todos = await TodoAccess.getAllTodos()
+        let todos = await TodoAccess.getAll()
         res.send(todos)
     } catch (err) {
         console.error(err)
@@ -39,11 +39,21 @@ exports.updateTodo = async (req, res) => {
         for (var key in newValues) {
             todo[key] = newValues[key]
         }
-        let updatedTodo = await TodoAccess.updateTodo(todo)
-        res.send(updatedTodo)
+        await TodoAccess.update(todo)
+        res.sendStatus(200)
     } catch (err) {
         console.log(err)
         res.send(err)
+    }
+}
+
+exports.deleteTodo = async (req, res) => {
+    try {
+        let todo = req.todo.toJSON()
+        await TodoAccess.delete(todo.id)
+        res.sendStatus(200)
+    } catch (err) {
+        console.error(err)
     }
 }
 

@@ -1,11 +1,11 @@
 
 const Todo = require('../models/todo.model');
 
-exports.createTodo = (todo) => {
+exports.create = (todo) => {
     return Todo.create(todo)
 }
 
-exports.getAllTodos = () => {
+exports.getAll = () => {
     return Todo.findAll()
 }
 
@@ -13,6 +13,10 @@ exports.getById = (id) => {
     return Todo.findByPk(id)
 }
 
-exports.updateTodo = (todo) => {
+exports.update = (todo) => {
     return Todo.update(todo, { where: { id: todo.id } })
+}
+
+exports.delete = (id) => {
+    return Todo.destroy({ where: { id: id } })
 }
