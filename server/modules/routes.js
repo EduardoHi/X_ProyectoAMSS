@@ -10,7 +10,7 @@ router.get(MODULE_PATH + '/', function (req, res, next) {
 
 // Routes of Modules
 const routes = [
-  require('../modules/todo/routes/todo.routes'),
+  require('./todo/routes/todo.routes'),
 ]
 
 // Use routes on modules 

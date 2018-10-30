@@ -17,11 +17,4 @@ const Todo = sequelizeConnection.define('todo', {
     }
 });
 
-Todo.sync({ force: true }).then(() => {
-    return Todo.create({
-        firstLabel: 'Hello',
-        secondLabel: 'World'
-    });
-});
-
 module.exports = Todo
