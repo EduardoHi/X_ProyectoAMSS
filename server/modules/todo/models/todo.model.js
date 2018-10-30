@@ -15,6 +15,8 @@ const Todo = sequelizeConnection.define('todo', {
     secondLabel: {
         type: Sequelize.STRING
     }
-});
+}, {
+        paranoid: true
+    });
 
 module.exports = Todo
