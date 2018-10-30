@@ -1,22 +1,43 @@
+const Todo = require("../models/todo.model");
+const { accessErrorHandler } = require("../../../lib/errorHandler");
+const ErrorEnum = require("../../../lib/enums/error");
 
-const Todo = require('../models/todo.model');
+exports.create = async todo => {
+  try {
+    return await Todo.create(todo);
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+};
 
-exports.create = (todo) => {
-    return Todo.create(todo)
-}
+exports.getAll = async () => {
+  try {
+    return await Todo.findAll();
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+};
 
-exports.getAll = () => {
-    return Todo.findAll()
-}
+exports.getById = async id => {
+  try {
+    return await Todo.findByPk(id);
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+};
 
-exports.getById = (id) => {
-    return Todo.findByPk(id)
-}
+exports.update = async todo => {
+  try {
+    return await Todo.update(todo, { where: { id: todo.id } });
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+};
 
-exports.update = (todo) => {
-    return Todo.update(todo, { where: { id: todo.id } })
-}
-
-exports.delete = (id) => {
-    return Todo.destroy({ where: { id: id } })
-}
+exports.delete = async id => {
+  try {
+    return await Todo.destroy({ where: { id: id } });
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+};

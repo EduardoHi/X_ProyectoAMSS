@@ -1,15 +1,15 @@
-const { Enum } = require('enumify')
+const { Enum } = require("enumify");
 
 class ErrorEnum extends Enum {
-    static get names() {
-        return ErrorEnum.enumValues.map(e => e.name)
-    }
+  static get names() {
+    return ErrorEnum.enumValues.map(e => e.name);
+  }
 }
 
 ErrorEnum.initEnum({
-    GENERIC: {
-        display: "Algo salió mal."
-    }
-})
+  GENERIC: {
+    display: "Algo salió mal."
+  }
+});
 
-module.exports = ErrorEnum
+module.exports = ErrorEnum;

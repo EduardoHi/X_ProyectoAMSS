@@ -1,21 +1,19 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-const MODULE_PATH = '/api';
+const MODULE_PATH = "/api";
 
-// GET home page
-router.get(MODULE_PATH + '/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
+// server home page
+router.get(MODULE_PATH + "/", function(req, res, next) {
+  res.render("index", { title: "Express" });
 });
 
-// Routes of Modules
-const routes = [
-  require('./todo/routes/todo.routes'),
-]
+// routes of Modules
+const routes = [require("./todo/routes/todo.routes")];
 
-// Use routes on modules 
+// use routes on modules
 routes.forEach(r => {
-  router.use(MODULE_PATH, r)
-})
+  router.use(MODULE_PATH, r);
+});
 
 module.exports = router;

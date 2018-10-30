@@ -1,5 +1,3 @@
-
-
-const Todo = require('./todo/models/todo.model');
+const Todo = require("./todo/models/todo.model");
 
 // DB Relationships
