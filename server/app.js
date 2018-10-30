@@ -5,7 +5,9 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var router = require("./modules/routes");
 var jwt = require("express-jwt");
-var config = require("./lib/config");
+
+const config = require("./lib/config");
+const ErrorEnum = require("./lib/enums/error");
 
 var app = express();
 
@@ -32,6 +34,12 @@ app.use(
     path: config.jwt.usecurePaths
   })
 );
+
+app.use((err, req, res, next) => {
+  if (err.name === "UnauthorizedError") {
+    res.status(401).send(ErrorEnum.UNAUTHORIZED);
+  }
+});
 
 // define custom routes
 app.use("", router);

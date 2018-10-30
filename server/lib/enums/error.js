@@ -9,6 +9,9 @@ class ErrorEnum extends Enum {
 ErrorEnum.initEnum({
   GENERIC: {
     display: "Algo salió mal."
+  },
+  UNAUTHORIZED: {
+    display: "No tienes los permisos necesarios para accesar."
   }
 });
 
