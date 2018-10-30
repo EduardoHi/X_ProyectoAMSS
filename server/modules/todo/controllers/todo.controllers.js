@@ -1,6 +1,7 @@
 
 const TodoAccess = require('../dataAccess/todo.access')
-
+const SuccessEnum = require('../../../lib/enums/success')
+const ErrorEnum = require('../../../lib/enums/error')
 
 exports.createTodo = async (req, res) => {
     try {
@@ -8,7 +9,7 @@ exports.createTodo = async (req, res) => {
         res.send(todo)
     } catch (err) {
         console.log(err)
-        res.send(err)
+        res.send(ErrorEnum.GENERIC)
     }
 }
 
@@ -18,7 +19,7 @@ exports.getAllTodos = async (req, res) => {
         res.send(todos)
     } catch (err) {
         console.error(err)
-        res.send(err)
+        res.send(ErrorEnum.GENERIC)
     }
 };
 
@@ -28,7 +29,7 @@ exports.getTodo = async (req, res) => {
         res.send(todo)
     } catch (err) {
         console.err(err)
-        res.send(err)
+        res.send(ErrorEnum.GENERIC)
     }
 }
 
@@ -40,10 +41,10 @@ exports.updateTodo = async (req, res) => {
             todo[key] = newValues[key]
         }
         await TodoAccess.update(todo)
-        res.sendStatus(200)
+        res.send(SuccessEnum.UPDATE)
     } catch (err) {
         console.log(err)
-        res.send(err)
+        res.send(ErrorEnum.GENERIC)
     }
 }
 
@@ -51,9 +52,10 @@ exports.deleteTodo = async (req, res) => {
     try {
         let todo = req.todo.toJSON()
         await TodoAccess.delete(todo.id)
-        res.sendStatus(200)
+        res.send(SuccessEnum.DELETE)
     } catch (err) {
         console.error(err)
+        res.send(ErrorEnum.GENERIC)
     }
 }
 
@@ -66,6 +68,6 @@ exports.getTodoById = async (req, res, next, id) => {
         next();
     } catch (err) {
         console.error(err)
-        res.send(err)
+        res.send(ErrorEnum.GENERIC)
     }
 }
