@@ -1,6 +1,9 @@
 .Login {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 350px;
+  position: relative;
+}
+
+.Login .Card > p {
+  font-size: 10px;
+  margin-top: 20px;
+  margin-bottom: 8px;
 }

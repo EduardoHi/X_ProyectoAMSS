@@ -1,0 +1,29 @@
+.Button {
+  padding: 8px 16px;
+  width: 100%;
+  min-width: 120px;
+
+  font-size: 12px;
+
+  border: none;
+  border-radius: 8px;
+
+  color: white;
+  background: rgb(53, 92, 186);
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
+
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.Button:hover {
+  transform: scale(1.025);
+  box-shadow: 0 10px 24px 0 rgba(0, 0, 0, 0.1);
+}
+
+.Button:active {
+  background: rgb(75, 111, 197);
+}
+
+.Button:focus {
+  outline: none;
+}

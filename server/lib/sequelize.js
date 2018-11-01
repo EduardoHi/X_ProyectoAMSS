@@ -1,11 +1,13 @@
 const Sequelize = require('sequelize');
+const { database, dropAndCreate } = require('./config')
+
 
 const sequelizeConnection = new Sequelize(
-    'transpais', // database
-    'root', // username
-    '', // password
+    database.name,
+    database.username,
+    database.password,
     {
-        host: 'localhost',
+        host: database.host,
         dialect: 'mysql',
         operatorsAliases: false,
         pool: {
@@ -20,5 +22,13 @@ const sequelizeConnection = new Sequelize(
 sequelizeConnection.authenticate()
     .then(() => console.log('Connection has been established successfully'))
     .catch(err => console.error('Unable to connect to the database:', err));
+
+if (dropAndCreate) {
+    sequelizeConnection.sync({ force: dropAndCreate })
+        .then(() => {
+            require('../lib/dataInit')
+        })
+        .catch(err => console.error(err))
+}
 
 module.exports = sequelizeConnection
