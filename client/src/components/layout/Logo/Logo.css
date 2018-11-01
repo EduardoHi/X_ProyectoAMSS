@@ -1,0 +1,12 @@
+.Logo {
+  position: absolute;
+  margin: 0;
+  top: -48px;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 8px;
+}

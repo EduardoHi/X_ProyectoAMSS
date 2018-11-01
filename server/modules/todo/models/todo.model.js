@@ -1,22 +1,25 @@
-const Sequelize = require('sequelize')
-const sequelizeConnection = require('../../../lib/sequelize')
+const Sequelize = require("sequelize");
+const sequelizeConnection = require("../../../lib/sequelize");
 
-const Todo = sequelizeConnection.define('todo', {
+const Todo = sequelizeConnection.define(
+  "todo",
+  {
     id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV1,
-        primaryKey: true,
-        allowNull: false,
-
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV1,
+      primaryKey: true,
+      allowNull: false
     },
     firstLabel: {
-        type: Sequelize.STRING
+      type: Sequelize.STRING
     },
     secondLabel: {
-        type: Sequelize.STRING
+      type: Sequelize.STRING
     }
-}, {
-        paranoid: true
-    });
+  },
+  {
+    paranoid: true
+  }
+);
 
-module.exports = Todo
+module.exports = Todo;

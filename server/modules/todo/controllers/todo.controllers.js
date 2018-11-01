@@ -1,13 +1,14 @@
 const TodoAccess = require("../dataAccess/todo.access");
 const SuccessEnum = require("../../../lib/enums/success");
 const ErrorEnum = require("../../../lib/enums/error");
+const { handleError } = require("../../../lib/errorHandler");
 
 exports.createTodo = async (req, res) => {
   try {
     let todo = await TodoAccess.create(req.body);
     res.send(todo);
   } catch (err) {
-    res.send(err);
+    res.status(400).send(err);
   }
 };
 
@@ -16,7 +17,7 @@ exports.getAllTodos = async (req, res) => {
     let todos = await TodoAccess.getAll();
     res.send(todos);
   } catch (err) {
-    res.send(ErrorEnum.GENERIC);
+    res.status(400).send(err);
   }
 };
 
@@ -25,7 +26,7 @@ exports.getTodo = async (req, res) => {
     let todo = req.todo;
     res.send(todo);
   } catch (err) {
-    res.send(ErrorEnum.GENERIC);
+    res.status(400).send(err);
   }
 };
 
@@ -39,7 +40,7 @@ exports.updateTodo = async (req, res) => {
     await TodoAccess.update(todo);
     res.send(SuccessEnum.UPDATE);
   } catch (err) {
-    res.send(ErrorEnum.GENERIC);
+    res.status(400).send(err);
   }
 };
 
@@ -49,7 +50,7 @@ exports.deleteTodo = async (req, res) => {
     await TodoAccess.delete(todo.id);
     res.send(SuccessEnum.DELETE);
   } catch (err) {
-    res.send(ErrorEnum.GENERIC);
+    res.status(400).send(err);
   }
 };
 
@@ -61,6 +62,6 @@ exports.getTodoById = async (req, res, next, id) => {
     req.todo = todo;
     next();
   } catch (err) {
-    res.send(ErrorEnum.GENERIC);
+    res.status(400).send(err);
   }
 };

@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var router = require("./modules/routes");
 var jwt = require("express-jwt");
+var cors = require("cors");
 
 const config = require("./lib/config");
 const ErrorEnum = require("./lib/enums/error");
@@ -24,6 +25,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(cors());
 
 // jwt
 app.use(
