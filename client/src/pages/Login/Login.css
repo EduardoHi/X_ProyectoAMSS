@@ -1,0 +1,17 @@
+.Login {
+  position: relative;
+}
+
+.Login .Logo {
+  position: absolute;
+  left: 50%;
+  top: -24px;
+  transform: translate(-50%, -100%);
+}
+
+.Login .Card > p {
+  font-size: 10px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  text-align: center;
+}

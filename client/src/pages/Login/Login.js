@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import "./Login.css";
-import Button from "../components/actionable/Button/Button";
-import Card from "../components/layout/Card/Card";
-import List from "../components/layout/List/List";
-import Input from "../components/actionable/Input/Input";
-import { TodoService } from "../services/todo.service";
-import Logo from "../components/layout/Logo/Logo";
+import Button from "../../components/actionable/Button/Button";
+import Card from "../../components/layout/Card/Card";
+import List from "../../components/layout/List/List";
+import Input from "../../components/actionable/Input/Input";
+import Logo from "../../components/layout/Logo/Logo";
 
 class Login extends Component {
   // Web service example

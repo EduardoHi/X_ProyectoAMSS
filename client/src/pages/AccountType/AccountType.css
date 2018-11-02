@@ -1,0 +1,13 @@
+.AccountType {
+  position: relative;
+}
+
+.AccountType .Grid .Card {
+  opacity: 0.9;
+  transition: opacity 0.1s, transform 0.1s;
+}
+
+.AccountType .Grid .Card:hover {
+  opacity: 1;
+  transform: scale(1.0125);
+}

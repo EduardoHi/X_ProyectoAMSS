@@ -1,0 +1,20 @@
+.Header {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.Header .BackButton {
+  position: absolute;
+  left: 0;
+  margin: auto 0;
+  bottom: 0;
+  top: 0;
+}
+
+.Header h2 {
+  margin: 4px 0 0 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
