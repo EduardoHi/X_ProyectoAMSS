@@ -16,6 +16,7 @@
 }
 
 .Button:hover {
+  cursor: pointer;
   transform: scale(1.025);
   box-shadow: 0 10px 24px 0 rgba(0, 0, 0, 0.1);
 }

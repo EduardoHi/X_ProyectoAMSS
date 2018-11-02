@@ -22,8 +22,18 @@
   border-color: rgb(53, 92, 186);
 }
 
-.Input p {
+.Input > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Input > div > * {
   font-size: 10px;
-  text-align: left;
   margin: 6px 0 0 6px;
+}
+
+.Input > div a {
+  text-align: right;
+  color: #717171;
+  font-weight: 600;
 }

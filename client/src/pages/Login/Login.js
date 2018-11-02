@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./Login.css";
 import Button from "../../components/actionable/Button/Button";
 import Card from "../../components/layout/Card/Card";
@@ -36,10 +37,13 @@ class Login extends Component {
               type={"password"}
               name={"Contraseña"}
               placeholder={"Shhhh!"}
+              link={"/recover-password"}
+              linkName={"¿Olvidaste tu contraseña?"}
             />
           </List>
           <p>
-            ¿Aún no tienes una cuenta? <a href="#">Registrate aquí</a>.
+            ¿Aún no tienes una cuenta?{" "}
+            <Link to="/account-type">Registrate aquí</Link>.
           </p>
           <Button>Entrar</Button>
         </Card>
