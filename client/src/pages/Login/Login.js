@@ -1,25 +1,34 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Link from "react-router-dom/Link";
 import "./Login.css";
+
 import Button from "../../components/actionable/Button/Button";
+import Input from "../../components/actionable/Input/Input";
+
 import Card from "../../components/layout/Card/Card";
 import List from "../../components/layout/List/List";
-import Input from "../../components/actionable/Input/Input";
 import Logo from "../../components/layout/Logo/Logo";
 
+import TodoService from "../../services/todo.service";
+
 class Login extends Component {
-  // Web service example
-  // async componentDidMount() {
-  //   try {
-  //     let todos = await TodoService.getAll();
-  //     this.setState({
-  //       todos: todos
-  //     });
-  //     console.log(this.state.todos);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: []
+    };
+  }
+  // web service example
+  async componentDidMount() {
+    try {
+      let todos = await TodoService.getAll();
+      this.setState({
+        todos: todos
+      });
+    } catch (err) {
+      this.props.alert({ error: true, message: err.display });
+    }
+  }
 
   render() {
     return (
@@ -43,7 +52,7 @@ class Login extends Component {
           </List>
           <p>
             ¿Aún no tienes una cuenta?{" "}
-            <Link to="/account-type">Registrate aquí</Link>.
+            <Link to="/account-type">Regístrate aquí</Link>.
           </p>
           <Button>Entrar</Button>
         </Card>

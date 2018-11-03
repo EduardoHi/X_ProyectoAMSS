@@ -25,9 +25,15 @@ class AccountType extends Component {
               </p>
             </Card>
           </Link>
-          <Card width={360}>
-            <h3>Conductor</h3>
-          </Card>
+          <Link to="driver-register">
+            <Card width={360}>
+              <h3>Conductor</h3>
+              <p>
+                Kjfn fkmdfdm fsmdnf smnf vjdsvj fnmdf jdf smdfv dmfnv dfmn
+                jfbdmaodskjdmn sd fmansdf amsnd fnas dfbn.
+              </p>
+            </Card>
+          </Link>
         </Grid>
       </div>
     );

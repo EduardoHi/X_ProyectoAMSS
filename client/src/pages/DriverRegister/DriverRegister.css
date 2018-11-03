@@ -1,0 +1,13 @@
+.DriverRegister .Card .Grid {
+  margin-bottom: 24px;
+}
+
+.DriverRegister > .Card > .Grid > div.GreyCard {
+  padding: 24px;
+  border-radius: 8px;
+  background: lightgray;
+}
+
+.DriverRegister > .Card > .Grid > div.GreyCard .List > p {
+  text-align: center;
+}

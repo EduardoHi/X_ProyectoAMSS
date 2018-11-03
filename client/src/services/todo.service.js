@@ -1,8 +1,8 @@
 import Config from "../lib/config";
 import axios from "axios";
-import { ServiceUtils } from "../lib/ServiceUtils";
+import ServiceUtils from "../lib/ServiceUtils";
 
-export class TodoService {
+export default class TodoService {
   static MODULE_PATH = Config.apiURL() + "/todo";
 
   static async getAll() {
