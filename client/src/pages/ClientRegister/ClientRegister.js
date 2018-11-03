@@ -5,8 +5,36 @@ import List from "../../components/layout/List/List";
 import Header from "../../components/layout/Header/Header";
 import Input from "../../components/actionable/Input/Input";
 import Button from "../../components/actionable/Button/Button";
+import UserService from "../../services/user.service";
 
 class ClientRegister extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {
+        name: null,
+        email: null,
+        phone: null,
+        password: null,
+        confirmPassword: null
+      }
+    };
+  }
+
+  registerUser = async () => {
+    try {
+      await UserService.create(this.state.user);
+      this.props.alert({ message: "Usuario registrado con éxito." });
+      this.props.history.push("/login");
+    } catch (err) {
+      this.props.alert({ error: true, message: err.display });
+    }
+  };
+
+  updateValue = async value => {
+    await this.setState({ user: { ...this.state.user, ...value } });
+  };
+
   render() {
     return (
       <div className="ClientRegister">
@@ -14,29 +42,38 @@ class ClientRegister extends Component {
         <Card width={360}>
           <h3>Completa la Siguiente Forma</h3>
           <List>
-            <Input type={"text"} name={"Nombre"} placeholder={"John Doe"} />
+            <Input
+              type={"text"}
+              name={"Nombre"}
+              placeholder={"John Doe"}
+              onChange={value => this.updateValue({ name: value })}
+            />
             <Input
               type={"email"}
               name={"Correo Electrónico"}
               placeholder={"ejemplo@ejemplo.com"}
+              onChange={value => this.updateValue({ email: value })}
             />
             <Input
               type={"number"}
               name={"Teléfono"}
               placeholder={"123-456-7890"}
+              onChange={value => this.updateValue({ phone: value })}
             />
             <Input
               type={"password"}
               name={"Contraseña"}
               placeholder={"Shhhhh!"}
+              onChange={value => this.updateValue({ password: value })}
             />
             <Input
               type={"password"}
               name={"Confirmar Contraseña"}
               placeholder={"Shhhhh!"}
+              onChange={value => this.updateValue({ confirmPassword: value })}
             />
           </List>
-          <Button>Registrarme</Button>
+          <Button onClick={this.registerUser}>Registrarme</Button>
         </Card>
       </div>
     );

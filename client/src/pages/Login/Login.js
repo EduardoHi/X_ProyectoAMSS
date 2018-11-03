@@ -9,26 +9,22 @@ import Card from "../../components/layout/Card/Card";
 import List from "../../components/layout/List/List";
 import Logo from "../../components/layout/Logo/Logo";
 
-import TodoService from "../../services/todo.service";
-
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: []
+      user: {
+        email: null,
+        password: null
+      }
     };
   }
-  // web service example
-  async componentDidMount() {
-    try {
-      let todos = await TodoService.getAll();
-      this.setState({
-        todos: todos
-      });
-    } catch (err) {
-      this.props.alert({ error: true, message: err.display });
-    }
-  }
+
+  updateValue = value => {
+    this.setState({
+      user: { ...this.state.user, ...value }
+    });
+  };
 
   render() {
     return (
@@ -41,6 +37,7 @@ class Login extends Component {
               type={"email"}
               name={"Correo Electrónico"}
               placeholder={"ejemplo@ejemplo.com"}
+              onChange={value => this.updateValue({ email: value })}
             />
             <Input
               type={"password"}
@@ -48,6 +45,7 @@ class Login extends Component {
               placeholder={"Shhhh!"}
               link={"/recover-password"}
               linkName={"¿Olvidaste tu contraseña?"}
+              onChange={value => this.updateValue({ password: value })}
             />
           </List>
           <p>

@@ -4,6 +4,15 @@ const { UserSchema, UserOptions } = require("../../user/models/user.model");
 
 const DriverSchema = Object.assign(UserSchema, {
   // Fields that are only for the driver
+  taxiBrand: {
+    type: Sequelize.STRING
+  },
+  taxiModel: {
+    type: Sequelize.STRING
+  },
+  taxiLicensePlate: {
+    type: Sequelize.STRING
+  },
   taxiNumber: {
     type: Sequelize.NUMERIC
   }

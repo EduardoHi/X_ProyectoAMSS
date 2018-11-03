@@ -9,7 +9,11 @@ router.get(MODULE_PATH + "/", function(req, res, next) {
 });
 
 // routes of Modules
-const routes = [require("./todo/routes/todo.routes")];
+const routes = [
+  require("./todo/routes/todo.routes"),
+  require("./user/routes/user.routes"),
+  require("./driver/routes/driver.routes")
+];
 
 // use routes on modules
 routes.forEach(r => {

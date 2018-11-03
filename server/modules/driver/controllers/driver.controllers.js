@@ -6,7 +6,7 @@ exports.createDriver = async (req, res) => {
     res.send(driver);
   } catch (err) {
     console.log(err);
-    res.send(err);
+    res.status(400).send(err);
   }
 };
 
@@ -16,7 +16,7 @@ exports.getAllDrivers = async (req, res) => {
     res.send(drivers);
   } catch (err) {
     console.error(err);
-    res.send(err);
+    res.status(400).send(err);
   }
 };
 
@@ -26,7 +26,7 @@ exports.getDriver = async (req, res) => {
     res.send(driver);
   } catch (err) {
     console.err(err);
-    res.send(err);
+    res.status(400).send(err);
   }
 };
 
@@ -41,7 +41,7 @@ exports.updateDriver = async (req, res) => {
     res.send(updatedDriver);
   } catch (err) {
     console.log(err);
-    res.send(err);
+    res.status(400).send(err);
   }
 };
 
@@ -53,6 +53,6 @@ exports.getDriverById = async (req, res, next, id) => {
     next();
   } catch (err) {
     console.error(err);
-    res.send(err);
+    res.status(400).send(err);
   }
 };

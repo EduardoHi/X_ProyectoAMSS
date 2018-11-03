@@ -6,7 +6,7 @@ exports.createUser = async (req, res) => {
     res.send(user);
   } catch (err) {
     console.log(err);
-    res.send(err);
+    res.status(400).send(err);
   }
 };
 
@@ -16,7 +16,7 @@ exports.getAllUsers = async (req, res) => {
     res.send(users);
   } catch (err) {
     console.error(err);
-    res.send(err);
+    res.status(400).send(err);
   }
 };
 
@@ -26,7 +26,7 @@ exports.getUser = async (req, res) => {
     res.send(user);
   } catch (err) {
     console.err(err);
-    res.send(err);
+    res.status(400).send(err);
   }
 };
 
@@ -41,7 +41,7 @@ exports.updateUser = async (req, res) => {
     res.send(updatedUser);
   } catch (err) {
     console.log(err);
-    res.send(err);
+    res.status(400).send(err);
   }
 };
 
@@ -53,6 +53,6 @@ exports.getUserById = async (req, res, next, id) => {
     next();
   } catch (err) {
     console.error(err);
-    res.send(err);
+    res.status(400).send(err);
   }
 };
