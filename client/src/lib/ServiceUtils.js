@@ -2,8 +2,8 @@ import localforage from "localforage";
 
 export default class ServiceUtils {
   static customer = "Customer";
-  static customer = "Driver";
-  static customer = "Admin";
+  static driver = "Driver";
+  static admin = "Admin";
 
   static extractData(res) {
     return res.data;
@@ -30,7 +30,7 @@ export default class ServiceUtils {
   static async authenticateCustomer() {
     try {
       const auth = await localforage.getItem("auth");
-      if (auth && auth.token && auth.type === Customer) return true;
+      if (auth && auth.token && auth.type === this.customer) return true;
       return false;
     } catch (err) {
       return false;
