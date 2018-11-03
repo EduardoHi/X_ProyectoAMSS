@@ -25,3 +25,11 @@ exports.getAllUsers = async () => {
     throw accessErrorHandler(err);
   }
 };
+
+exports.findByEmail = async email => {
+  try {
+    return await User.findOne({ where: { email } });
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+};

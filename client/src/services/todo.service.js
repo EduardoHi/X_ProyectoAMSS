@@ -7,7 +7,8 @@ export default class TodoService {
 
   static async getAll() {
     try {
-      const res = await axios.get(this.MODULE_PATH + "/");
+      const headers = await ServiceUtils.getHeader();
+      const res = await axios.get(this.MODULE_PATH + "/", headers);
       return ServiceUtils.extractData(res);
     } catch (err) {
       throw ServiceUtils.handleError(err);

@@ -1,4 +1,6 @@
 const bcrypt = require("bcrypt-nodejs");
+const jwt = require("jsonwebtoken");
+const Config = require("./config");
 
 function genSalt() {
   return new Promise(function(resolve, reject) {
@@ -22,7 +24,7 @@ function compare(data, encrypted) {
     bcrypt.compare(
       data,
       encrypted,
-      (err, res) => (err ? reject(err) : resolve(re))
+      (err, res) => (err ? reject(err) : resolve(res))
     );
   });
 }
@@ -43,6 +45,12 @@ const Security = {
     } catch (err) {
       console.error(err);
     }
+  },
+
+  async signToken(user) {
+    try {
+      return jwt.sign({ id: user.id, email: user.email }, Config.jwt.secret);
+    } catch (err) {}
   }
 };
 

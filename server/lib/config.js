@@ -9,6 +9,6 @@ module.exports = {
   jwt: {
     credentialsRequired: true,
     secret: "why-so-serioussss",
-    usecurePaths: ["/api/"]
+    usecurePaths: ["/api/auth-user/", "/api/driver/", "/api/user/"]
   }
 };

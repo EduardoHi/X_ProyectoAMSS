@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Link from "react-router-dom/Link";
+import withRouter from "react-router-dom/withRouter";
+
 import "./Login.css";
 
 import Button from "../../components/actionable/Button/Button";
@@ -8,6 +10,7 @@ import Input from "../../components/actionable/Input/Input";
 import Card from "../../components/layout/Card/Card";
 import List from "../../components/layout/List/List";
 import Logo from "../../components/layout/Logo/Logo";
+import UserAuthService from "../../services/user.auth.service";
 
 class Login extends Component {
   constructor(props) {
@@ -19,6 +22,15 @@ class Login extends Component {
       }
     };
   }
+
+  login = async () => {
+    try {
+      await UserAuthService.login(this.state.user);
+      this.props.history.push("/account-type");
+    } catch (err) {
+      this.props.alert({ error: true, message: err.display });
+    }
+  };
 
   updateValue = value => {
     this.setState({
@@ -52,11 +64,11 @@ class Login extends Component {
             ¿Aún no tienes una cuenta?{" "}
             <Link to="/account-type">Regístrate aquí</Link>.
           </p>
-          <Button>Entrar</Button>
+          <Button onClick={this.login}>Entrar</Button>
         </Card>
       </div>
     );
   }
 }
 
-export default Login;
+export default withRouter(Login);

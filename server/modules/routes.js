@@ -12,6 +12,7 @@ router.get(MODULE_PATH + "/", function(req, res, next) {
 const routes = [
   require("./todo/routes/todo.routes"),
   require("./user/routes/user.routes"),
+  require("./user/routes/user.auth.routes"),
   require("./driver/routes/driver.routes")
 ];
 
