@@ -1,10 +1,14 @@
 import React, { Component } from "react";
+import withRouter from "react-router-dom/withRouter";
 import "./ClientRegister.css";
+
 import Card from "../../components/layout/Card/Card";
 import List from "../../components/layout/List/List";
 import Header from "../../components/layout/Header/Header";
+
 import Input from "../../components/actionable/Input/Input";
 import Button from "../../components/actionable/Button/Button";
+
 import UserService from "../../services/user.service";
 
 class ClientRegister extends Component {
@@ -80,4 +84,4 @@ class ClientRegister extends Component {
   }
 }
 
-export default ClientRegister;
+export default withRouter(ClientRegister);

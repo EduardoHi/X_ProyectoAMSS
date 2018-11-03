@@ -28,4 +28,15 @@ export default class ServiceUtils {
       console.error(err);
     }
   }
+
+  static async authenticate() {
+    try {
+      const token = await localforage.getItem("token");
+      if (token) return true;
+      return false;
+    } catch (err) {
+      console.log("NO");
+      return false;
+    }
+  }
 }

@@ -1,12 +1,16 @@
 import React, { Component } from "react";
+import withRouter from "react-router-dom/withRouter";
 import "./DriverRegister.css";
+
 import Card from "../../components/layout/Card/Card";
 import List from "../../components/layout/List/List";
 import Grid from "../../components/layout/Grid/Grid";
 import Header from "../../components/layout/Header/Header";
+
 import Input from "../../components/actionable/Input/Input";
 import Button from "../../components/actionable/Button/Button";
 import FilePicker from "../../components/actionable/FilePicker/FilePicker";
+
 import DriverService from "../../services/driver.service";
 
 class DriverRegister extends Component {
@@ -134,4 +138,4 @@ class DriverRegister extends Component {
   }
 }
 
-export default DriverRegister;
+export default withRouter(DriverRegister);

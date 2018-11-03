@@ -9,6 +9,7 @@ import RecoverPassword from "./pages/RecoverPassword/RecoverPassword";
 import DriverRegister from "./pages/DriverRegister/DriverRegister";
 
 import Alert from "./components/utility/alert/Alert";
+import Home from "./pages/Home/Home";
 
 class App extends Component {
   constructor(props) {
@@ -66,34 +67,45 @@ class App extends Component {
             <Route
               exact
               path="/login"
-              render={() => <Login alert={data => this.displayAlert(data)} />}
+              render={() => (
+                <Login alert={async data => this.displayAlert(data)} />
+              )}
             />
             <Route
               exact
               path="/account-type"
               render={() => (
-                <AccountType alert={data => this.displayAlert(data)} />
+                <AccountType alert={async data => this.displayAlert(data)} />
               )}
             />
             <Route
               exact
               path="/client-register"
               render={() => (
-                <ClientRegister alert={data => this.displayAlert(data)} />
+                <ClientRegister alert={async data => this.displayAlert(data)} />
               )}
             />
             <Route
               exact
               path="/driver-register"
               render={() => (
-                <DriverRegister alert={data => this.displayAlert(data)} />
+                <DriverRegister alert={async data => this.displayAlert(data)} />
               )}
             />
             <Route
               exact
               path="/recover-password"
               render={() => (
-                <RecoverPassword alert={data => this.displayAlert(data)} />
+                <RecoverPassword
+                  alert={async data => this.displayAlert(data)}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/home"
+              render={() => (
+                <Home alert={async data => this.displayAlert(data)} />
               )}
             />
           </div>

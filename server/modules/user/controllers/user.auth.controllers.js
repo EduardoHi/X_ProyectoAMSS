@@ -16,11 +16,10 @@ exports.login = async (req, res) => {
       throw "Invalid password";
     }
     const token = await security.signToken(user);
-    console.log(token);
     res.header("token", token);
     res.send({ token, user });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).send(err);
   }
 };
