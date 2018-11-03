@@ -23,7 +23,7 @@ class Login extends Component {
     };
   }
 
-  login = async () => {
+  customerLogin = async () => {
     try {
       await UserAuthService.login(this.state.user);
       this.props.history.push("/home");
@@ -64,7 +64,7 @@ class Login extends Component {
             ¿Aún no tienes una cuenta?{" "}
             <Link to="/account-type">Regístrate aquí</Link>.
           </p>
-          <Button onClick={this.login}>Entrar</Button>
+          <Button onClick={this.customerLogin}>Entrar</Button>
         </Card>
       </div>
     );

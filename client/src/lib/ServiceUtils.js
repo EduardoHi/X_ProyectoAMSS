@@ -1,6 +1,10 @@
 import localforage from "localforage";
 
 export default class ServiceUtils {
+  static customer = "Customer";
+  static customer = "Driver";
+  static customer = "Admin";
+
   static extractData(res) {
     return res.data;
   }
@@ -10,9 +14,12 @@ export default class ServiceUtils {
     return err.response.data;
   }
 
-  static async setHeader(res) {
+  static async setCustomerHeader(res) {
     try {
-      await localforage.setItem("token", "Bearer " + res.data.token);
+      await localforage.setItem("auth", {
+        token: "Bearer " + res.data.token,
+        type: this.customer
+      });
       await localforage.setItem("user", res.data.user);
       return res.data.user;
     } catch (err) {
@@ -20,23 +27,22 @@ export default class ServiceUtils {
     }
   }
 
-  static async getHeader() {
+  static async authenticateCustomer() {
     try {
-      const authHeader = await localforage.getItem("token");
-      return { headers: { Authorization: authHeader } };
+      const auth = await localforage.getItem("auth");
+      if (auth && auth.token && auth.type === Customer) return true;
+      return false;
     } catch (err) {
-      console.error(err);
+      return false;
     }
   }
 
-  static async authenticate() {
+  static async getHeader() {
     try {
-      const token = await localforage.getItem("token");
-      if (token) return true;
-      return false;
+      const authHeader = await localforage.getItem("auth").token;
+      return { headers: { Authorization: authHeader } };
     } catch (err) {
-      console.log("NO");
-      return false;
+      console.error(err);
     }
   }
 }

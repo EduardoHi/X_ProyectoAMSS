@@ -5,7 +5,7 @@ import ServiceUtils from "../../lib/ServiceUtils";
 
 class Home extends Component {
   async componentWillMount() {
-    const authenticated = await ServiceUtils.authenticate();
+    const authenticated = await ServiceUtils.authenticateCustomer();
     if (!authenticated) this.props.history.push("/login");
   }
 
