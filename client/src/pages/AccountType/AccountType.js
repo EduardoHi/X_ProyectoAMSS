@@ -4,13 +4,9 @@ import "./AccountType.css";
 import Card from "../../components/layout/Card/Card";
 import Grid from "../../components/layout/Grid/Grid";
 import Header from "../../components/layout/Header/Header";
-import BackButton from "../../components/actionable/BackButton/BackButton";
 import Link from "react-router-dom/Link";
 
 class AccountType extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div className="AccountType">
