@@ -1,19 +1,20 @@
 const AdminAccess = require("../dataAccess/admin.access");
 const security = require("../../../lib/security");
+const ErrorEnum = require("../../../lib/enums/error");
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
     let admin = await AdminAccess.findByEmail(email);
     if (!admin) {
-      throw "There isn't an associated admin to this email";
+      throw ErrorEnum.NO_ACCOUNT;
     }
     const authenticated = await security.isPasswordValid(
       password,
       admin.password
     );
     if (!authenticated) {
-      throw "Invalid password";
+      throw ErrorEnum.INCORRECT_PASSWORD;
     }
     const token = await security.signToken(admin);
     res.header("token", token);
