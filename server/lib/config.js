@@ -5,10 +5,15 @@ module.exports = {
     password: "",
     host: "localhost"
   },
-  dropAndCreate: false,
+  dropAndCreate: true,
   jwt: {
     credentialsRequired: true,
     secret: "why-so-serioussss",
-    usecurePaths: ["/api/auth-user/", "/api/driver/", "/api/user/"]
+    usecurePaths: [
+      "/api/auth-admin/",
+      "/api/auth-user/",
+      "/api/driver/",
+      "/api/user/"
+    ]
   }
 };

@@ -14,6 +14,29 @@ export default class ServiceUtils {
     return err.response.data;
   }
 
+  static async setAdminHeader(res) {
+    try {
+      await localforage.setItem("auth", {
+        token: "Bearer " + res.data.token,
+        type: this.admin
+      });
+      await localforage.setItem("admin", res.data.admin);
+      return res.data.admin;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  static async authenticateAdmin() {
+    try {
+      const auth = await localforage.getItem("auth");
+      if (auth && auth.token && auth.type === this.admin) return true;
+      return false;
+    } catch (err) {
+      return false;
+    }
+  }
+
   static async setCustomerHeader(res) {
     try {
       await localforage.setItem("auth", {

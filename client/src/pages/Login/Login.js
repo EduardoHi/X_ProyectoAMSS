@@ -11,6 +11,7 @@ import Card from "../../components/layout/Card/Card";
 import List from "../../components/layout/List/List";
 import Logo from "../../components/layout/Logo/Logo";
 import UserAuthService from "../../services/user.auth.service";
+import AdminAuthService from "../../services/admin.auth.service";
 
 class Login extends Component {
   constructor(props) {
@@ -22,6 +23,15 @@ class Login extends Component {
       }
     };
   }
+
+  adminLogin = async () => {
+    try {
+      await AdminAuthService.login(this.state.user);
+      this.props.history.push("/home");
+    } catch (err) {
+      this.props.alert({ error: true, message: err.display });
+    }
+  };
 
   customerLogin = async () => {
     try {
@@ -64,7 +74,7 @@ class Login extends Component {
             ¿Aún no tienes una cuenta?{" "}
             <Link to="/account-type">Regístrate aquí</Link>.
           </p>
-          <Button onClick={this.customerLogin}>Entrar</Button>
+          <Button onClick={this.adminLogin}>Entrar</Button>
         </Card>
       </div>
     );
