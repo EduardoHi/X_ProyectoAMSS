@@ -78,8 +78,8 @@ export default class ServiceUtils {
 
   static async getHeader() {
     try {
-      const authHeader = await localforage.getItem("auth").token;
-      return { headers: { Authorization: authHeader } };
+      const authHeader = await localforage.getItem("auth");
+      return { headers: { Authorization: authHeader.token } };
     } catch (err) {
       console.error(err);
     }

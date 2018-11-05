@@ -4,12 +4,12 @@ import "./App.css";
 
 import Login from "./pages/Login/Login";
 import AccountType from "./pages/AccountType/AccountType";
-import ClientRegister from "./pages/ClientRegister/ClientRegister";
 import RecoverPassword from "./pages/RecoverPassword/RecoverPassword";
 import DriverRegister from "./pages/DriverRegister/DriverRegister";
 
 import Alert from "./components/utility/alert/Alert";
 import Home from "./pages/Home/Home";
+import CustomerRegister from "./pages/CustomerRegister/CustomerRegister";
 
 class App extends Component {
   constructor(props) {
@@ -80,9 +80,11 @@ class App extends Component {
             />
             <Route
               exact
-              path="/client-register"
+              path="/customer-register"
               render={() => (
-                <ClientRegister alert={async data => this.displayAlert(data)} />
+                <CustomerRegister
+                  alert={async data => this.displayAlert(data)}
+                />
               )}
             />
             <Route

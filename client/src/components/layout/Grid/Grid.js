@@ -2,7 +2,17 @@ import React from "react";
 import "./Grid.css";
 
 function Grid(props) {
-  return <div className="Grid">{props.children}</div>;
+  let style = props.gapSize
+    ? {
+        gridColumnGap: `${props.gapSize}px`,
+        gridRowGap: `${props.gapSize}px`
+      }
+    : {};
+  return (
+    <div className="Grid" style={style}>
+      {props.children}
+    </div>
+  );
 }
 
 export default Grid;

@@ -12,20 +12,16 @@ class AccountType extends Component {
       <div className="AccountType">
         <Header title={"Selecciona el Tipo de Cuenta"} />
         <Grid>
-          <Link to="/client-register">
+          <Link to="/customer-register">
             <Card width={360}>
               <h3>Cliente</h3>
-              <p>
-                Pide tu viaje con la app de Transpais o en taquilla.
-              </p>
+              <p>Pide tu viaje con la app de Transpais o en taquilla.</p>
             </Card>
           </Link>
           <Link to="driver-register">
             <Card width={360}>
               <h3>Conductor</h3>
-              <p>
-                Únete a Transpais como conductor.
-              </p>
+              <p>Únete a Transpais como conductor.</p>
             </Card>
           </Link>
         </Grid>

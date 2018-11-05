@@ -6,8 +6,9 @@ import "./Home.css";
 import ServiceUtils from "../../lib/ServiceUtils";
 
 import Nav from "../../components/layout/Nav/Nav";
-import Clients from "../Clients/Clients";
+import Customers from "../Customers/Customers";
 import Drivers from "../Drivers/Drivers";
+import Customer from "../Customer/Customer";
 
 class Home extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Home extends Component {
         type: null
       },
       adminTopPages: [
-        { link: `${this.props.match.url}/users`, name: "Usuarios" },
+        { link: `${this.props.match.url}/customers`, name: "Usuarios" },
         { link: `${this.props.match.url}/drivers`, name: "Conductores" }
       ],
       adminBottomPages: [
@@ -68,9 +69,29 @@ class Home extends Component {
           bottomPages={bottomPages}
         />
         <div className="MainContainer">
-          <Route path={`${this.props.match.url}/users`} component={Clients} />
-          <Route path={`${this.props.match.url}/drivers`} component={Drivers} />
-          {/* More routes */}
+          <div className="MainContainerMargin">
+            <Route
+              exact
+              path={`${this.props.match.url}/customers`}
+              render={() => (
+                <Customers alert={async data => this.props.alert(data)} />
+              )}
+            />
+            <Route
+              path={`${this.props.match.url}/customers/:customerId`}
+              render={() => (
+                <Customer alert={async data => this.props.alert(data)} />
+              )}
+            />
+            <Route
+              exact
+              path={`${this.props.match.url}/drivers`}
+              render={() => (
+                <Drivers alert={async data => this.props.alert(data)} />
+              )}
+            />
+            {/* More routes */}
+          </div>
         </div>
       </div>
     );

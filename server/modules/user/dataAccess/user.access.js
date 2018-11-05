@@ -26,6 +26,14 @@ exports.getAllUsers = async () => {
   }
 };
 
+exports.findById = async id => {
+  try {
+    return await User.findOne({ where: { id } });
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+};
+
 exports.findByEmail = async email => {
   try {
     return await User.findOne({ where: { email } });

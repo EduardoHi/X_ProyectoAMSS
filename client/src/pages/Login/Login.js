@@ -27,7 +27,7 @@ class Login extends Component {
   adminLogin = async () => {
     try {
       await AdminAuthService.login(this.state.user);
-      this.props.history.push("/app");
+      this.props.history.push("/app/customers");
     } catch (err) {
       this.props.alert({ error: true, message: err.display });
     }

@@ -12,3 +12,8 @@
   padding: 24px;
   background: rgba(255, 255, 255, 0.9);
 }
+
+.Home .MainContainer .MainContainerMargin {
+  max-width: 700px;
+  margin: auto;
+}

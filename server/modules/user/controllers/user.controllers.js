@@ -1,4 +1,5 @@
 const UserAccess = require("../dataAccess/user.access");
+const ErrorEnum = require("../../../lib/enums/error");
 
 exports.createUser = async (req, res) => {
   try {
@@ -47,8 +48,8 @@ exports.updateUser = async (req, res) => {
 
 exports.getUserById = async (req, res, next, id) => {
   try {
-    let user = await UserAccess.getById(id);
-    if (!user) throw "Not found";
+    let user = await UserAccess.findById(id);
+    if (!user) throw ErrorEnum.GENERIC;
     req.user = user;
     next();
   } catch (err) {

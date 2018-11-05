@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import withRouter from "react-router-dom/withRouter";
-import "./ClientRegister.css";
+import "./CustomerRegister.css";
 
 import Card from "../../components/layout/Card/Card";
 import List from "../../components/layout/List/List";
@@ -11,7 +11,7 @@ import Button from "../../components/actionable/Button/Button";
 
 import UserService from "../../services/user.service";
 
-class ClientRegister extends Component {
+class CustomerRegister extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +41,7 @@ class ClientRegister extends Component {
 
   render() {
     return (
-      <div className="ClientRegister">
+      <div className="CustomerRegister">
         <Header title={"Registro de Cliente"} />
         <Card width={360}>
           <h3>Completa la Siguiente Forma</h3>
@@ -84,4 +84,4 @@ class ClientRegister extends Component {
   }
 }
 
-export default withRouter(ClientRegister);
+export default withRouter(CustomerRegister);

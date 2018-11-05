@@ -1,0 +1,37 @@
+.UserCard {
+  transition: transform 0.1s;
+}
+
+.UserCard:hover {
+  cursor: pointer;
+  transform: scale(1.0125);
+}
+
+.UserCard .Card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.UserCard .Card .UserCardLeft p {
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+.UserCard .Card p {
+  margin: 0;
+}
+
+.UserCard .Card .UserCardLeft {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.UserCard .Card .UserCardLeft img {
+  height: 32px;
+  width: 32px;
+  background: lightgray;
+  border-radius: 100%;
+}
