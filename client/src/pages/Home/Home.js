@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import withRouter from "react-router-dom/withRouter";
 import "./Home.css";
 
@@ -33,7 +33,7 @@ class Home extends Component {
 
   async componentWillMount() {
     try {
-      const authenticated = await ServiceUtils.authenticateAdmin();
+      const authenticated = await ServiceUtils.authenticateCustomer();
       if (!authenticated) {
         this.props.history.push("/login");
         return;
