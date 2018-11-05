@@ -41,3 +41,11 @@ exports.findByEmail = async email => {
     throw accessErrorHandler(err);
   }
 };
+
+exports.deleteUser = async id => {
+  try {
+    return await User.destroy({ where: { id } });
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+};

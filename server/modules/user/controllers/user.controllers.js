@@ -11,6 +11,17 @@ exports.createUser = async (req, res) => {
   }
 };
 
+exports.adminCreateUser = async (req, res) => {
+  try {
+    let newUser = { ...req.body, password: "password" };
+    let user = await UserAccess.createUser(newUser);
+    res.send(user);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send(err);
+  }
+};
+
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await UserAccess.getAllUsers();
@@ -40,6 +51,17 @@ exports.updateUser = async (req, res) => {
     }
     let updatedUser = await UserAccess.updateUser(user);
     res.send(updatedUser);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send(err);
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    let { id } = req.user.toJSON();
+    await UserAccess.deleteUser(id);
+    res.send({});
   } catch (err) {
     console.log(err);
     res.status(400).send(err);

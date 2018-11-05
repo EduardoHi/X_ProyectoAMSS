@@ -5,9 +5,15 @@ import { Link } from "react-router-dom";
 export default class Input extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: null
-    };
+    if (props.value) {
+      this.state = {
+        value: props.value
+      };
+    } else {
+      this.state = {
+        value: ""
+      };
+    }
   }
 
   onChange = async event => {
@@ -30,6 +36,7 @@ export default class Input extends Component {
     return (
       <div className="Input">
         <input
+          value={this.state.value}
           type={this.props.type}
           placeholder={this.props.placeholder}
           onChange={this.onChange}

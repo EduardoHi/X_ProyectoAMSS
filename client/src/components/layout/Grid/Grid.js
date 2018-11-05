@@ -8,6 +8,9 @@ function Grid(props) {
         gridRowGap: `${props.gapSize}px`
       }
     : {};
+  style = props.firstColumnWidth
+    ? { ...style, gridTemplateColumns: `${props.firstColumnWidth}px auto` }
+    : style;
   return (
     <div className="Grid" style={style}>
       {props.children}

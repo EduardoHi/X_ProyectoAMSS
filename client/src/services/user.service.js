@@ -37,4 +37,42 @@ export default class UserService {
       throw ServiceUtils.handleError(err);
     }
   }
+
+  static async adminCreate(user) {
+    try {
+      const res = await axios.post(
+        this.MODULE_PATH + "/create",
+        user,
+        await ServiceUtils.getHeader()
+      );
+      return ServiceUtils.extractData(res);
+    } catch (err) {
+      throw ServiceUtils.handleError(err);
+    }
+  }
+
+  static async update(id, user) {
+    try {
+      const res = await axios.put(
+        this.MODULE_PATH + "/" + id,
+        user,
+        await ServiceUtils.getHeader()
+      );
+      return ServiceUtils.extractData(res);
+    } catch (err) {
+      throw ServiceUtils.handleError(err);
+    }
+  }
+
+  static async delete(id) {
+    try {
+      const res = await axios.delete(
+        this.MODULE_PATH + "/" + id,
+        await ServiceUtils.getHeader()
+      );
+      return ServiceUtils.extractData(res);
+    } catch (err) {
+      throw ServiceUtils.handleError(err);
+    }
+  }
 }

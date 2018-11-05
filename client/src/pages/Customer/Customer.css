@@ -1,0 +1,28 @@
+.Customer .Card {
+  margin-bottom: 24px;
+}
+
+.Customer h3 {
+  text-align: left;
+}
+
+.Customer .CustomerProfileImageContainer {
+  height: 80px;
+  width: 80px;
+  background: lightgray;
+  border-radius: 100%;
+}
+
+.Customer h4.SubHeader {
+  margin-top: 24px;
+}
+
+.Customer > .BottomAcceptButton {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.Customer > .BottomDeleteButton {
+  display: flex;
+  flex-direction: row;
+}

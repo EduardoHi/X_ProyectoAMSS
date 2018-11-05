@@ -13,7 +13,10 @@ router
 router
   .route(MODULE_PATH + "/:userId")
   .get(userController.getUser)
-  .put(userController.updateUser);
+  .put(userController.updateUser)
+  .delete(userController.deleteUser);
+
+router.route(MODULE_PATH + "/create").post(userController.adminCreateUser);
 
 router.param("userId", userController.getUserById);
 

@@ -33,7 +33,7 @@ class Home extends Component {
 
   async componentWillMount() {
     try {
-      const authenticated = await ServiceUtils.authenticateCustomer();
+      const authenticated = await ServiceUtils.authenticateAdmin();
       if (!authenticated) {
         this.props.history.push("/login");
         return;
