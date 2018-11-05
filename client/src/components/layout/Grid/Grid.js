@@ -11,6 +11,7 @@ function Grid(props) {
   style = props.firstColumnWidth
     ? { ...style, gridTemplateColumns: `${props.firstColumnWidth}px auto` }
     : style;
+  style = props.width ? { ...style, width: `${props.width}px` } : style;
   return (
     <div className="Grid" style={style}>
       {props.children}

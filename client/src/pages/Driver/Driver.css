@@ -1,0 +1,28 @@
+.Driver .Card {
+  margin-bottom: 24px;
+}
+
+.Driver h3 {
+  text-align: left;
+}
+
+.Driver .CustomerProfileImageContainer {
+  height: 80px;
+  width: 80px;
+  background: lightgray;
+  border-radius: 100%;
+}
+
+.Driver h4.SubHeader {
+  margin-top: 24px;
+}
+
+.Driver > .BottomAcceptButton {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.Driver > .BottomDeleteButton {
+  display: flex;
+  flex-direction: row;
+}
