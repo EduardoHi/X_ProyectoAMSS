@@ -26,12 +26,16 @@ class ClientRegister extends Component {
   }
 
   registerUser = async () => {
-    try {
-      await UserService.create(this.state.user);
-      this.props.alert({ message: "Usuario registrado con éxito." });
-      this.props.history.push("/login");
-    } catch (err) {
-      this.props.alert({ error: true, message: err.display });
+    if (this.state.user.password !== this.state.user.confirmPassword) {
+      this.props.alert({ error: true, message: "Las contraseñas no coinciden." })
+    } else {
+      try {
+        await UserService.create(this.state.user);
+        this.props.alert({ error: false, message: "Usuario registrado con éxito." });
+        this.props.history.push("/login");
+      } catch (err) {
+        this.props.alert({ error: true, message: err.display });
+      }
     }
   };
 
@@ -45,38 +49,43 @@ class ClientRegister extends Component {
         <Header title={"Registro de Cliente"} />
         <Card width={360}>
           <h3>Completa la Siguiente Forma</h3>
-          <List>
-            <Input
-              type={"text"}
-              name={"Nombre"}
-              placeholder={"John Doe"}
-              onChange={value => this.updateValue({ name: value })}
-            />
-            <Input
-              type={"email"}
-              name={"Correo Electrónico"}
-              placeholder={"ejemplo@ejemplo.com"}
-              onChange={value => this.updateValue({ email: value })}
-            />
-            <Input
-              type={"number"}
-              name={"Teléfono"}
-              placeholder={"123-456-7890"}
-              onChange={value => this.updateValue({ phone: value })}
-            />
-            <Input
-              type={"password"}
-              name={"Contraseña"}
-              placeholder={"Shhhhh!"}
-              onChange={value => this.updateValue({ password: value })}
-            />
-            <Input
-              type={"password"}
-              name={"Confirmar Contraseña"}
-              placeholder={"Shhhhh!"}
-              onChange={value => this.updateValue({ confirmPassword: value })}
-            />
-          </List>
+          <form name={"register"}>
+            <List>
+              <Input
+                type={"text"}
+                name={"Nombre"}
+                placeholder={"John Doe"}
+                onChange={value => this.updateValue({ name: value })}
+              />
+              <Input
+                type={"email"}
+                name={"Correo Electrónico"}
+                placeholder={"ejemplo@ejemplo.com"}
+                onChange={value => this.updateValue({ email: value })}
+                pattern={"email"}
+              />
+              <Input
+                type={"number"}
+                name={"Teléfono"}
+                placeholder={"123-456-7890"}
+                onChange={value => this.updateValue({ phone: value })}
+              />
+              <Input
+                type={"password"}
+                name={"Contraseña"}
+                placeholder={"Shhhhh!"}
+                onChange={value => this.updateValue({ password: value })}
+                pattern={"password"}
+              />
+              <Input
+                type={"password"}
+                name={"Confirmar Contraseña"}
+                placeholder={"Shhhhh!"}
+                onChange={value => this.updateValue({ confirmPassword: value })}
+                pattern={"password"}
+              />
+            </List>
+          </form>
           <Button onClick={this.registerUser}>Registrarme</Button>
         </Card>
       </div>

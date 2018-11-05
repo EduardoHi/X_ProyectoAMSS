@@ -10,7 +10,8 @@ const UserSchema = {
     allowNull: false
   },
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
   },
   email: {
     type: Sequelize.STRING(155),
@@ -19,10 +20,11 @@ const UserSchema = {
   },
   password: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   phone: {
-    type: Sequelize.STRING(155)
+    type: Sequelize.STRING(155),
+    allowNull: null,
   }
 };
 
@@ -44,7 +46,7 @@ const UserOptions = {
 const User = sequelizeConnection.define("user", UserSchema, UserOptions);
 
 // removing password from the user json to never send passwords to clients
-User.prototype.toJSON = function() {
+User.prototype.toJSON = function () {
   var values = Object.assign({}, this.get());
 
   delete values.password;
