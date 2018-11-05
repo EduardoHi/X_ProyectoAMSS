@@ -53,8 +53,8 @@ class App extends Component {
     return alert.error ? (
       <Alert error={alert.message} close={() => this.hideAlert()} />
     ) : (
-      <Alert success={alert.message} close={() => this.hideAlert()} />
-    );
+        <Alert success={alert.message} close={() => this.hideAlert()} />
+      );
   };
 
   render() {

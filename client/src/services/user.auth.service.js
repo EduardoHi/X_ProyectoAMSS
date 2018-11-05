@@ -13,4 +13,13 @@ export default class UserAuthService {
       throw ServiceUtils.handleError(err);
     }
   }
+
+  static async recoverPassword(mail) {
+    try {
+      const res = await axios.post(this.MODULE_PATH + "/recoverPassword", mail);
+      return ServiceUtils.extractData(res);
+    } catch (err) {
+      throw ServiceUtils.handleError(err);
+    }
+  }
 }

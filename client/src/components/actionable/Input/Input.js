@@ -29,10 +29,10 @@ export default class Input extends Component {
           <Link to={this.props.link}>{this.props.linkName}</Link>
         </div>
       ) : (
-        <div>
-          <p>{this.props.name}</p>
-        </div>
-      );
+          <div>
+            <p>{this.props.name}</p>
+          </div>
+        );
     return (
       <div className="Input">
         <input
@@ -40,9 +40,16 @@ export default class Input extends Component {
           type={this.props.type}
           placeholder={this.props.placeholder}
           onChange={this.onChange}
+          pattern={patterns[this.props.pattern]}
         />
         {textFields}
       </div>
     );
   }
+}
+
+const patterns = {
+  email: "^([a-zA-Z0-9 _-.]+)@([a-zA-Z0-9_-.]+).([a-zA-Z]{2,5})",
+  password: ".{6,}",
+  anything: ".",
 }
