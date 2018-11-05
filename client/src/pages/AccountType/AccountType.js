@@ -16,8 +16,7 @@ class AccountType extends Component {
             <Card width={360}>
               <h3>Cliente</h3>
               <p>
-                Pndakjs adsknjkas dansnd mdfsndf smdnf mn akjnsdkja dkjnsd
-                nkdjaksjd askndjkas dnksjdnfksd nkjfsndf.
+                Pide tu viaje con la app de Transpais o en taquilla.
               </p>
             </Card>
           </Link>
@@ -25,8 +24,7 @@ class AccountType extends Component {
             <Card width={360}>
               <h3>Conductor</h3>
               <p>
-                Kjfn fkmdfdm fsmdnf smnf vjdsvj fnmdf jdf smdfv dmfnv dfmn
-                jfbdmaodskjdmn sd fmansdf amsnd fnas dfbn.
+                Únete a Transpais como conductor.
               </p>
             </Card>
           </Link>
