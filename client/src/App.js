@@ -102,8 +102,7 @@ class App extends Component {
               )}
             />
             <Route
-              exact
-              path="/home"
+              path="/app"
               render={() => (
                 <Home alert={async data => this.displayAlert(data)} />
               )}

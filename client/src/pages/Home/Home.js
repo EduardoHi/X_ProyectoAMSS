@@ -6,7 +6,9 @@ import "./Home.css";
 import ServiceUtils from "../../lib/ServiceUtils";
 
 import Nav from "../../components/layout/Nav/Nav";
-import NavLink from "../../components/layout/Nav/Nav";
+import Clients from "../Clients/Clients";
+import Drivers from "../Drivers/Drivers";
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -18,12 +20,12 @@ class Home extends Component {
         type: null
       },
       adminTopPages: [
-        { link: "/users", name: "Usuarios" },
-        { link: "/drivers", name: "Conductores" }
+        { link: `${this.props.match.url}/users`, name: "Usuarios" },
+        { link: `${this.props.match.url}/drivers`, name: "Conductores" }
       ],
       adminBottomPages: [
-        { link: "/history", name: "Historial" },
-        { link: "/configuration", name: "Configuración" }
+        { link: `${this.props.match.url}/history`, name: "Historial" },
+        { link: `${this.props.match.url}/configuration`, name: "Configuración" }
       ]
     };
   }
@@ -66,7 +68,9 @@ class Home extends Component {
           bottomPages={bottomPages}
         />
         <div className="MainContainer">
-          <Router>{/* Paginas aqui */}</Router>
+          <Route path={`${this.props.match.url}/users`} component={Clients} />
+          <Route path={`${this.props.match.url}/drivers`} component={Drivers} />
+          {/* More routes */}
         </div>
       </div>
     );
