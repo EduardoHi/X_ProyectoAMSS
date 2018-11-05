@@ -12,6 +12,12 @@ ErrorEnum.initEnum({
   },
   UNAUTHORIZED: {
     display: "No tienes los permisos necesarios para accesar."
+  },
+  NO_ACCOUNT: {
+    display: "No existe una cuenta asociada a ese correo electrónico."
+  },
+  INCORRECT_PASSWORD: {
+    display: "Contraseña o correo electrónico incorrecto."
   }
 });
 

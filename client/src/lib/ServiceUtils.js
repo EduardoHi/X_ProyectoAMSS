@@ -1,9 +1,12 @@
 import localforage from "localforage";
 
 export default class ServiceUtils {
-  static customer = "Customer";
-  static driver = "Driver";
-  static admin = "Admin";
+  static customer = "customer";
+  static driver = "driver";
+  static admin = "admin";
+
+  static currentUser = null;
+  static currentUserType = null;
 
   static extractData(res) {
     return res.data;
@@ -14,13 +17,26 @@ export default class ServiceUtils {
     return err.response.data;
   }
 
+  static async getUser() {
+    if (this.currentUser && this.currentUserType)
+      return { user: this.currentUser, userType: this.currentUserType };
+    try {
+      this.currentUser = await localforage.getItem("user");
+      const auth = await localforage.getItem("auth");
+      this.currentUserType = auth.type;
+      return { user: this.currentUser, userType: this.currentUserType };
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   static async setAdminHeader(res) {
     try {
       await localforage.setItem("auth", {
         token: "Bearer " + res.data.token,
         type: this.admin
       });
-      await localforage.setItem("admin", res.data.admin);
+      await localforage.setItem("user", res.data.admin);
       return res.data.admin;
     } catch (err) {
       console.error(err);
@@ -62,8 +78,8 @@ export default class ServiceUtils {
 
   static async getHeader() {
     try {
-      const authHeader = await localforage.getItem("auth").token;
-      return { headers: { Authorization: authHeader } };
+      const authHeader = await localforage.getItem("auth");
+      return { headers: { Authorization: authHeader.token } };
     } catch (err) {
       console.error(err);
     }

@@ -1,0 +1,36 @@
+.NavLink a {
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.NavLink a:hover {
+  color: white;
+}
+
+.Nav {
+  position: relative;
+  width: 200px;
+  min-width: 200px;
+}
+
+.Nav .Logo {
+  margin: 24px 0;
+  font-size: 14px;
+}
+
+.Nav .NavSpacer {
+  height: 12px;
+}
+
+.Nav .NavFooter {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 24px;
+}
+
+.Nav .NavFooter .Button {
+  margin-top: 12px;
+}

@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 import Login from "./pages/Login/Login";
 import AccountType from "./pages/AccountType/AccountType";
-import ClientRegister from "./pages/ClientRegister/ClientRegister";
 import RecoverPassword from "./pages/RecoverPassword/RecoverPassword";
 import DriverRegister from "./pages/DriverRegister/DriverRegister";
 
 import Alert from "./components/utility/alert/Alert";
 import Home from "./pages/Home/Home";
+import CustomerRegister from "./pages/CustomerRegister/CustomerRegister";
 
 class App extends Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class App extends Component {
       <div className="App">
         {alert}
         <Router>
-          <div>
+          <Switch>
             <Route
               exact
               path="/login"
@@ -80,9 +80,11 @@ class App extends Component {
             />
             <Route
               exact
-              path="/client-register"
+              path="/customer-register"
               render={() => (
-                <ClientRegister alert={async data => this.displayAlert(data)} />
+                <CustomerRegister
+                  alert={async data => this.displayAlert(data)}
+                />
               )}
             />
             <Route
@@ -102,13 +104,12 @@ class App extends Component {
               )}
             />
             <Route
-              exact
-              path="/home"
+              path="/app"
               render={() => (
                 <Home alert={async data => this.displayAlert(data)} />
               )}
             />
-          </div>
+          </Switch>
         </Router>
       </div>
     );

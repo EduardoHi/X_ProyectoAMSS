@@ -27,7 +27,7 @@ class Login extends Component {
   adminLogin = async () => {
     try {
       await AdminAuthService.login(this.state.user);
-      this.props.history.push("/home");
+      this.props.history.push("/app/customers");
     } catch (err) {
       this.props.alert({ error: true, message: err.display });
     }
@@ -36,7 +36,7 @@ class Login extends Component {
   customerLogin = async () => {
     try {
       await UserAuthService.login(this.state.user);
-      this.props.history.push("/home");
+      this.props.history.push("/app");
     } catch (err) {
       this.props.alert({ error: true, message: err.display });
     }
