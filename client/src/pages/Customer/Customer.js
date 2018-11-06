@@ -3,15 +3,11 @@ import withRouter from "react-router-dom/withRouter";
 import "./Customer.css";
 
 import Title from "../../components/layout/Title/Title";
-import Grid from "../../components/layout/Grid/Grid";
-import List from "../../components/layout/List/List";
-import Card from "../../components/layout/Card/Card";
-
-import Input from "../../components/actionable/Input/Input";
 
 import UserService from "../../services/user.service";
 import Button from "../../components/actionable/Button/Button";
 import DeleteButton from "../../components/actionable/DeleteButton/DeleteButton";
+import CustomerCard from "../../components/layout/CustomerCard/CustomerCard";
 
 class Customer extends Component {
   constructor(props) {
@@ -118,67 +114,6 @@ class Customer extends Component {
     else return <Title withBackButton={true}>Agregar Usuario</Title>;
   };
 
-  generateWatchView = () => {
-    const { name, email, phone, address } = this.state.customer;
-    return (
-      <List>
-        <h3>{name}</h3>
-        <div>
-          <h4>Información General</h4>
-          <p>{email}</p>
-          <p>{phone}</p>
-        </div>
-        <div>
-          <h4>Dirección</h4>
-          <p>{address}</p>
-        </div>
-      </List>
-    );
-  };
-
-  generateEditView = () => {
-    const { name, email, phone, address } = this.state.customer;
-    return (
-      <List>
-        <Input
-          type={"text"}
-          name={"Nombre"}
-          placeholder={"John Doe"}
-          value={name}
-          onChange={value => this.updateValue({ name: value })}
-        />
-        <h4 className="SubHeader">Información General</h4>
-        <Input
-          type={"email"}
-          name={"Correo Electrónico"}
-          placeholder={"ejemplo@ejemplo.com"}
-          value={email}
-          onChange={value => this.updateValue({ email: value })}
-        />
-        <Input
-          type={"number"}
-          name={"Teléfono"}
-          placeholder={"123-456-7890"}
-          value={phone}
-          onChange={value => this.updateValue({ phone: value })}
-        />
-        <h4 className="SubHeader">Dirección</h4>
-        <Input
-          type={"text"}
-          name={"Dirección"}
-          placeholder={"Av. DeezNuts"}
-          value={address}
-          onChange={value => this.updateValue({ address: value })}
-        />
-      </List>
-    );
-  };
-
-  renderView = () => {
-    if (this.state.editing) return this.generateEditView();
-    else return this.generateWatchView();
-  };
-
   renderBottomButtons = () => {
     const editing = this.state.editing;
     const id = this.state.customer.id;
@@ -223,20 +158,16 @@ class Customer extends Component {
 
   render() {
     const title = this.renderTitle();
-    const view = this.renderView();
     const buttons = this.renderBottomButtons();
 
     return (
       <div className="Customer">
         {title}
-        <Card width={400}>
-          <Grid firstColumnWidth={80}>
-            <div className="CustomerProfileImageContainer">
-              <img />
-            </div>
-            <div>{view}</div>
-          </Grid>
-        </Card>
+        <CustomerCard
+          editing={this.state.editing}
+          customer={this.state.customer}
+          updateValue={data => this.updateValue(data)}
+        />
         {buttons}
       </div>
     );

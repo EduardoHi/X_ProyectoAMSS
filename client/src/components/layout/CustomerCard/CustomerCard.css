@@ -1,0 +1,18 @@
+.CustomerCard .Card {
+  margin-bottom: 24px;
+}
+
+.CustomerCard h3 {
+  text-align: left;
+}
+
+.CustomerCard .CustomerProfileImageContainer {
+  height: 80px;
+  width: 80px;
+  background: lightgray;
+  border-radius: 100%;
+}
+
+.CustomerCard h4.SubHeader {
+  margin-top: 24px;
+}

@@ -3,34 +3,33 @@ import withRouter from "react-router-dom/withRouter";
 import "./Driver.css";
 
 import Title from "../../components/layout/Title/Title";
-import Grid from "../../components/layout/Grid/Grid";
-import List from "../../components/layout/List/List";
-import Card from "../../components/layout/Card/Card";
-
-import Input from "../../components/actionable/Input/Input";
-
-import UserService from "../../services/user.service";
 import Button from "../../components/actionable/Button/Button";
 import DeleteButton from "../../components/actionable/DeleteButton/DeleteButton";
+import DriverService from "../../services/driver.service";
+import DriverCard from "../../components/layout/DriverCard/DriverCard";
 
 class Driver extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      customer: {
+      driver: {
         id: null,
         name: null,
         email: null,
         phone: null,
-        address: null
+        address: null,
+        taxiBrand: null,
+        taxiModel: null,
+        taxiLicensePlate: null,
+        taxiNumber: null
       },
       editing: true
     };
-    const customerId = props.match.params.customerId;
-    if (customerId !== "new") {
+    const driverId = props.match.params.driverId;
+    if (driverId !== "new") {
       this.state = {
-        customer: {
-          id: customerId
+        driver: {
+          id: driverId
         },
         editing: false
       };
@@ -38,42 +37,42 @@ class Driver extends Component {
   }
 
   componentDidMount = async () => {
-    if (this.state.customer.id) {
-      await this.getCustomer();
+    if (this.state.driver.id) {
+      await this.getDriver();
     }
   };
 
-  getCustomer = async () => {
+  getDriver = async () => {
     try {
-      const customer = await UserService.getById(this.state.customer.id);
-      this.setState({ customer: customer });
+      const driver = await DriverService.getById(this.state.driver.id);
+      this.setState({ driver: driver });
     } catch (err) {
       this.props.alert({ error: true, message: err.display });
     }
   };
 
-  createCustomer = async () => {
+  createDriver = async () => {
     try {
-      const { id, ...customer } = this.state.customer;
-      await UserService.adminCreate(customer);
+      const { id, ...driver } = this.state.driver;
+      await DriverService.adminCreate(driver);
       this.props.history.goBack();
     } catch (err) {
       this.props.alert({ error: true, message: err.display });
     }
   };
 
-  updateCustomer = async () => {
+  updateDriver = async () => {
     try {
-      const { id, ...customer } = this.state.customer;
-      await UserService.update(id, customer);
+      const { id, ...driver } = this.state.driver;
+      await DriverService.update(id, driver);
     } catch (err) {
       this.props.alert({ error: true, message: err.display });
     }
   };
 
-  deleteCustomer = async () => {
+  deleteDriver = async () => {
     try {
-      await UserService.delete(this.state.customer.id);
+      await DriverService.delete(this.state.driver.id);
       this.props.history.goBack();
     } catch (err) {
       this.props.alert({ error: true, message: err.display });
@@ -82,12 +81,12 @@ class Driver extends Component {
 
   changeViewMode = async ({ update }) => {
     try {
-      if (update && this.state.customer.id) {
-        await this.updateCustomer();
-      } else if (update && !this.state.customer.id) {
-        await this.createCustomer();
+      if (update && this.state.driver.id) {
+        await this.updateDriver();
+      } else if (update && !this.state.driver.id) {
+        await this.createDriver();
       } else {
-        await this.getCustomer();
+        await this.getDriver();
       }
       this.setState({ editing: !this.state.editing });
     } catch (err) {
@@ -97,12 +96,12 @@ class Driver extends Component {
 
   updateValue = value => {
     this.setState({
-      customer: { ...this.state.customer, ...value }
+      driver: { ...this.state.driver, ...value }
     });
   };
 
   renderTitle = () => {
-    const id = !!this.state.customer.id;
+    const id = !!this.state.driver.id;
     const editing = this.state.editing;
     if (id && !editing)
       return (
@@ -111,77 +110,17 @@ class Driver extends Component {
           buttonTitle={"Editar"}
           onClick={() => this.changeViewMode({})}
         >
-          Usuario
+          Conductor
         </Title>
       );
-    else if (id && editing) return <Title withBackButton={true}>Usuario</Title>;
-    else return <Title withBackButton={true}>Agregar Usuario</Title>;
-  };
-
-  generateWatchView = () => {
-    const { name, email, phone, address } = this.state.customer;
-    return (
-      <List>
-        <h3>{name}</h3>
-        <div>
-          <h4>Información General</h4>
-          <p>{email}</p>
-          <p>{phone}</p>
-        </div>
-        <div>
-          <h4>Dirección</h4>
-          <p>{address}</p>
-        </div>
-      </List>
-    );
-  };
-
-  generateEditView = () => {
-    const { name, email, phone, address } = this.state.customer;
-    return (
-      <List>
-        <Input
-          type={"text"}
-          name={"Nombre"}
-          placeholder={"John Doe"}
-          value={name}
-          onChange={value => this.updateValue({ name: value })}
-        />
-        <h4 className="SubHeader">Información General</h4>
-        <Input
-          type={"email"}
-          name={"Correo Electrónico"}
-          placeholder={"ejemplo@ejemplo.com"}
-          value={email}
-          onChange={value => this.updateValue({ email: value })}
-        />
-        <Input
-          type={"number"}
-          name={"Teléfono"}
-          placeholder={"123-456-7890"}
-          value={phone}
-          onChange={value => this.updateValue({ phone: value })}
-        />
-        <h4 className="SubHeader">Dirección</h4>
-        <Input
-          type={"text"}
-          name={"Dirección"}
-          placeholder={"Av. DeezNuts"}
-          value={address}
-          onChange={value => this.updateValue({ address: value })}
-        />
-      </List>
-    );
-  };
-
-  renderView = () => {
-    if (this.state.editing) return this.generateEditView();
-    else return this.generateWatchView();
+    else if (id && editing)
+      return <Title withBackButton={true}>Conductor</Title>;
+    else return <Title withBackButton={true}>Agregar Conductor</Title>;
   };
 
   renderBottomButtons = () => {
     const editing = this.state.editing;
-    const id = this.state.customer.id;
+    const id = this.state.driver.id;
     if (editing && id) {
       return (
         <div className="BottomAcceptButton">
@@ -213,7 +152,7 @@ class Driver extends Component {
     } else {
       return (
         <div className="BottomDeleteButton">
-          <DeleteButton onClick={() => this.deleteCustomer()}>
+          <DeleteButton onClick={() => this.deleteDriver()}>
             Aceptar
           </DeleteButton>
         </div>
@@ -223,20 +162,16 @@ class Driver extends Component {
 
   render() {
     const title = this.renderTitle();
-    const view = this.renderView();
     const buttons = this.renderBottomButtons();
 
     return (
       <div className="Driver">
         {title}
-        <Card width={400}>
-          <Grid firstColumnWidth={80}>
-            <div className="CustomerProfileImageContainer">
-              <img />
-            </div>
-            <div>{view}</div>
-          </Grid>
-        </Card>
+        <DriverCard
+          editing={this.state.editing}
+          driver={this.state.driver}
+          updateValue={data => this.updateValue(data)}
+        />
         {buttons}
       </div>
     );

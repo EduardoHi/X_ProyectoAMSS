@@ -13,7 +13,10 @@ router
 router
   .route(MODULE_PATH + "/:driverId")
   .get(driverController.getDriver)
-  .put(driverController.updateDriver);
+  .put(driverController.updateDriver)
+  .delete(driverController.deleteDriver);
+
+router.route(MODULE_PATH + "/create").post(driverController.adminCreateDriver);
 
 router.param("driverId", driverController.getDriverById);
 

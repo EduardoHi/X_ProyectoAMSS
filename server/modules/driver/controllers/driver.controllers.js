@@ -10,6 +10,17 @@ exports.createDriver = async (req, res) => {
   }
 };
 
+exports.adminCreateDriver = async (req, res) => {
+  try {
+    let newDriver = { ...req.body, password: "password" };
+    let driver = await DriverAccess.createDriver(newDriver);
+    res.send(driver);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send(err);
+  }
+};
+
 exports.getAllDrivers = async (req, res) => {
   try {
     const drivers = await DriverAccess.getAllDrivers();
@@ -39,6 +50,17 @@ exports.updateDriver = async (req, res) => {
     }
     let updatedDriver = await DriverAccess.updateDriver(driver);
     res.send(updatedDriver);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send(err);
+  }
+};
+
+exports.deleteDriver = async (req, res) => {
+  try {
+    let { id } = req.driver.toJSON();
+    await DriverAccess.deleteDriver(id);
+    res.send({});
   } catch (err) {
     console.log(err);
     res.status(400).send(err);

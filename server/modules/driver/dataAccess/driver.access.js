@@ -24,3 +24,19 @@ exports.getAllDrivers = async () => {
     throw accessErrorHandler(err);
   }
 };
+
+exports.getById = async id => {
+  try {
+    return await Driver.findOne({ where: { id } });
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+};
+
+exports.deleteDriver = async id => {
+  try {
+    return await Driver.destroy({ where: { id } });
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+};

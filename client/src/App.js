@@ -10,6 +10,7 @@ import DriverRegister from "./pages/DriverRegister/DriverRegister";
 import Alert from "./components/utility/alert/Alert";
 import Home from "./pages/Home/Home";
 import CustomerRegister from "./pages/CustomerRegister/CustomerRegister";
+import Loading from "./components/utility/loading/Loading";
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class App extends Component {
         active: false,
         error: true,
         message: ""
-      }
+      },
+      loading: false
     };
   }
 
@@ -53,29 +55,41 @@ class App extends Component {
     return alert.error ? (
       <Alert error={alert.message} close={() => this.hideAlert()} />
     ) : (
-        <Alert success={alert.message} close={() => this.hideAlert()} />
-      );
+      <Alert success={alert.message} close={() => this.hideAlert()} />
+    );
+  };
+
+  toggleLoading = loading => {
+    this.setState({ loading: loading });
   };
 
   render() {
     let alert = this.generateAlert();
+    let loading = this.state.loading ? <Loading /> : <></>;
     return (
       <div className="App">
         {alert}
+        {loading}
         <Router>
           <Switch>
             <Route
               exact
               path="/login"
               render={() => (
-                <Login alert={async data => this.displayAlert(data)} />
+                <Login
+                  alert={async data => this.displayAlert(data)}
+                  loading={loading => this.toggleLoading(loading)}
+                />
               )}
             />
             <Route
               exact
               path="/account-type"
               render={() => (
-                <AccountType alert={async data => this.displayAlert(data)} />
+                <AccountType
+                  alert={async data => this.displayAlert(data)}
+                  loading={loading => this.toggleLoading(loading)}
+                />
               )}
             />
             <Route
@@ -84,6 +98,7 @@ class App extends Component {
               render={() => (
                 <CustomerRegister
                   alert={async data => this.displayAlert(data)}
+                  loading={loading => this.toggleLoading(loading)}
                 />
               )}
             />
@@ -91,7 +106,10 @@ class App extends Component {
               exact
               path="/driver-register"
               render={() => (
-                <DriverRegister alert={async data => this.displayAlert(data)} />
+                <DriverRegister
+                  alert={async data => this.displayAlert(data)}
+                  loading={loading => this.toggleLoading(loading)}
+                />
               )}
             />
             <Route
@@ -100,13 +118,25 @@ class App extends Component {
               render={() => (
                 <RecoverPassword
                   alert={async data => this.displayAlert(data)}
+                  loading={loading => this.toggleLoading(loading)}
                 />
               )}
             />
             <Route
               path="/app"
               render={() => (
-                <Home alert={async data => this.displayAlert(data)} />
+                <Home
+                  alert={async data => this.displayAlert(data)}
+                  loading={loading => this.toggleLoading(loading)}
+                />
+              )}
+            />
+            <Route
+              render={() => (
+                <Login
+                  alert={async data => this.displayAlert(data)}
+                  loading={loading => this.toggleLoading(loading)}
+                />
               )}
             />
           </Switch>

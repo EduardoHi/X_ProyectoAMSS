@@ -9,6 +9,7 @@ import Nav from "../../components/layout/Nav/Nav";
 import Customers from "../Customers/Customers";
 import Drivers from "../Drivers/Drivers";
 import Customer from "../Customer/Customer";
+import Driver from "../Driver/Driver";
 
 class Home extends Component {
   constructor(props) {
@@ -74,20 +75,39 @@ class Home extends Component {
               exact
               path={`${this.props.match.url}/customers`}
               render={() => (
-                <Customers alert={async data => this.props.alert(data)} />
+                <Customers
+                  alert={async data => this.props.alert(data)}
+                  loading={loading => this.props.loading(loading)}
+                />
               )}
             />
             <Route
               path={`${this.props.match.url}/customers/:customerId`}
               render={() => (
-                <Customer alert={async data => this.props.alert(data)} />
+                <Customer
+                  alert={async data => this.props.alert(data)}
+                  loading={loading => this.props.loading(loading)}
+                />
               )}
             />
             <Route
               exact
               path={`${this.props.match.url}/drivers`}
               render={() => (
-                <Drivers alert={async data => this.props.alert(data)} />
+                <Drivers
+                  alert={async data => this.props.alert(data)}
+                  loading={loading => this.props.loading(loading)}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={`${this.props.match.url}/drivers/:driverId`}
+              render={() => (
+                <Driver
+                  alert={async data => this.props.alert(data)}
+                  loading={loading => this.props.loading(loading)}
+                />
               )}
             />
             {/* More routes */}

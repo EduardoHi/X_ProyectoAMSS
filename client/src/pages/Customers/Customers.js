@@ -15,10 +15,13 @@ class Customers extends Component {
 
   componentDidMount = async () => {
     try {
+      this.props.loading(true);
       const customers = await UserService.getAll();
       this.setState({ customers: customers });
     } catch (err) {
       this.props.alert({ error: true, message: err.display });
+    } finally {
+      this.props.loading(false);
     }
   };
 
