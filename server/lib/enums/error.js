@@ -18,6 +18,12 @@ ErrorEnum.initEnum({
   },
   INCORRECT_PASSWORD: {
     display: "Contraseña o correo electrónico incorrecto."
+  },
+  NO_USER_FOUND_WITH_MAIL: {
+    display: "No existe ningun usuario registrado con ese correo.",
+  },
+  ERROR_SENDIND_MAIL: {
+    display: "Ocurrió un error al mandar el correo",
   }
 });
 

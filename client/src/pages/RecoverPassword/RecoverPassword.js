@@ -7,15 +7,25 @@ import Header from "../../components/layout/Header/Header";
 import Input from "../../components/actionable/Input/Input";
 import Button from "../../components/actionable/Button/Button";
 import UserAuthService from "../../services/user.auth.service";
+import AdminAuthService from "../../services/admin.auth.service";
 
 class RecoverPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: null,
-      name: "J"
     }
   }
+
+  recoverAdminPassword = async () => {
+    try {
+      await AdminAuthService.recoverPassword({ email: this.state.email });
+      this.props.alert({ error: false, message: "Correo mandado con éxito." });
+      this.props.history.push("/login");
+    } catch (err) {
+      this.props.alert({ error: true, message: err.display });
+    }
+  };
 
   recoverPassword = async () => {
     try {
@@ -43,7 +53,7 @@ class RecoverPassword extends Component {
             placeholder={"ejemplo@ejemplo.com"}
             onChange={value => this.updateValue({ email: value })}
           />
-          <Button onClick={this.recoverPassword}>Confirmar</Button>
+          <Button onClick={this.recoverAdminPassword}>Confirmar</Button>
         </Card>
       </div>
     );

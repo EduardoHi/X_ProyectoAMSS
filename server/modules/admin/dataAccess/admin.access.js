@@ -10,6 +10,14 @@ exports.createAdmin = async admin => {
   }
 };
 
+exports.updateAdmin = async admin => {
+  try {
+    return await Admin.update(admin, { where: { id: admin.id } });
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+};
+
 exports.findByEmail = async email => {
   try {
     return await Admin.findOne({ where: { email } });
