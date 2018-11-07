@@ -13,12 +13,12 @@ export default class CustomerCard extends Component {
         <h3>{name}</h3>
         <div>
           <h4>Información General</h4>
-          <p>{email}</p>
-          <p>{phone}</p>
+          <p>Correo Electrónico: {email}</p>
+          <p>Teléfono: {phone}</p>
         </div>
         <div>
-          <h4>Dirección</h4>
-          <p>{address}</p>
+          <h4>Ubicación</h4>
+          <p>Dirección: {address}</p>
         </div>
       </List>
     );
@@ -54,7 +54,7 @@ export default class CustomerCard extends Component {
         <Input
           type={"text"}
           name={"Dirección"}
-          placeholder={"Av. DeezNuts"}
+          placeholder={"Av. Garza Sada"}
           value={address}
           onChange={value => this.props.updateValue({ address: value })}
         />

@@ -41,22 +41,22 @@ export default class DriverCard extends Component {
         <Grid gapSize={12}>
           <List>
             <h4 className="SubHeader">Información General</h4>
-            <p>{email}</p>
-            <p>{phone}</p>
+            <p>Correo Electrónico: {email}</p>
+            <p>Teléfono: {phone}</p>
           </List>
           {permits}
         </Grid>
-        <h4 className="SubHeader">Dirección</h4>
-        <p>{address}</p>
+        <h4 className="SubHeader">Ubicación</h4>
+        <p>Dirección: {address}</p>
         <h4 className="SubHeader">Automóvil</h4>
         <Grid>
           <List>
-            <p>{taxiBrand}</p>
-            <p>{taxiModel}</p>
+            <p>Marca: {taxiBrand}</p>
+            <p>Modelo: {taxiModel}</p>
           </List>
           <List>
-            <p>{taxiLicensePlate}</p>
-            <p>{taxiNumber}</p>
+            <p>Placas: {taxiLicensePlate}</p>
+            <p>Número: {taxiNumber}</p>
           </List>
         </Grid>
       </div>
@@ -109,7 +109,7 @@ export default class DriverCard extends Component {
         <Input
           type={"text"}
           name={"Dirección"}
-          placeholder={"Av. DeezNuts"}
+          placeholder={"Av. Garza Sada"}
           value={address}
           onChange={value => this.props.updateValue({ address: value })}
         />
