@@ -1,7 +1,7 @@
-const TodoAccess = require("../dataAccess/todo.access");
-const SuccessEnum = require("../../../lib/enums/success");
-const ErrorEnum = require("../../../lib/enums/error");
-const { handleError } = require("../../../lib/errorHandler");
+const TodoAccess = require("./dataAccess/todo.access");
+const SuccessEnum = require("../../lib/enums/success");
+const ErrorEnum = require("../../lib/enums/error");
+const { handleError } = require("../../lib/errorHandler");
 
 exports.createTodo = async (req, res) => {
   try {

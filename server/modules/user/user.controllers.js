@@ -1,5 +1,5 @@
-const UserAccess = require("../dataAccess/user.access");
-const ErrorEnum = require("../../../lib/enums/error");
+const UserAccess = require("./dataAccess/user.access");
+const ErrorEnum = require("../../lib/enums/error");
 
 exports.createUser = async (req, res) => {
   try {
