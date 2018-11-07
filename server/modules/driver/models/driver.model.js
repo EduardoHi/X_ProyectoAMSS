@@ -29,4 +29,4 @@ Driver.prototype.toJSON = function() {
 
 Driver.sync();
 
-module.exports = Driver;
+export default Driver;
