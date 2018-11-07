@@ -73,14 +73,14 @@ class CustomerRegister extends Component {
               <Input
                 type={"password"}
                 name={"Contraseña"}
-                placeholder={"Shhhhh!"}
+                placeholder={"Contraseña"}
                 onChange={value => this.updateValue({ password: value })}
                 pattern={"password"}
               />
               <Input
                 type={"password"}
                 name={"Confirmar Contraseña"}
-                placeholder={"Shhhhh!"}
+                placeholder={"Confirmar Contraseña"}
                 onChange={value => this.updateValue({ confirmPassword: value })}
                 pattern={"password"}
               />

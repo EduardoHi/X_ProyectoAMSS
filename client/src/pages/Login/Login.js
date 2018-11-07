@@ -64,7 +64,7 @@ class Login extends Component {
             <Input
               type={"password"}
               name={"Contraseña"}
-              placeholder={"Shhhh!"}
+              placeholder={"Contraseña"}
               link={"/recover-password"}
               linkName={"¿Olvidaste tu contraseña?"}
               onChange={value => this.updateValue({ password: value })}

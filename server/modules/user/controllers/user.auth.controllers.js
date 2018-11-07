@@ -37,21 +37,26 @@ exports.recoverPassword = async (req, res) => {
   mailOptions.subject = "Restablecimiento de contraseña";
   mailOptions.text = `La contraseña temporal de acceso es ${tempPass}`;
 
-  let user = await UserAccess.findByEmail(req.body.email);
-  user = user.toJSON();
-
-  if (!user) {
-    throw "No existe ningun usuario registrado con ese correo.";
-  }
-
-  user.password = await security.hashPassword(tempPass);
-
   try {
+    let user = await UserAccess.findByEmail(req.body.email);
+
+    if (!user) {
+      throw ErrorEnum.NO_USER_FOUND_WITH_MAIL;
+    }
+
+    user = user.toJSON();
+
+    user.password = await security.hashPassword(tempPass);
+
     UserAccess.updateUser(user).then(usr => {
       mailSender.sendMail(mailOptions);
+    }).then(() => {
+      res.send("Correo enviado con éxito");
     });
+
   } catch (err) {
-    throw "Ocurrió un error al mandar el correo";
+    console.error(err);
+    res.status(400).send(err);
   }
 
 };
