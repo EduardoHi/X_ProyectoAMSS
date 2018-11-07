@@ -1,7 +1,7 @@
-const AdminAccess = require("../dataAccess/admin.access");
-const security = require("../../../lib/security");
-const ErrorEnum = require("../../../lib/enums/error");
-const mailSender = require("../../../lib/mailSender");
+const AdminAccess = require("./dataAccess/admin.access");
+const security = require("../../lib/security");
+const ErrorEnum = require("../../lib/enums/error");
+const mailSender = require("../../lib/mailSender");
 
 async function login(req, res) {
   const { email, password } = req.body;

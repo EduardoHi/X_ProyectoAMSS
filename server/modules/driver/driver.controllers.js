@@ -1,4 +1,4 @@
-const DriverAccess = require("../dataAccess/driver.access");
+const DriverAccess = require("./dataAccess/driver.access");
 
 async function createDriver(req, res) {
   try {
