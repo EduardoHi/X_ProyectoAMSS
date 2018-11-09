@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const driverController = require("../controllers/driver.controllers");
+const driverController = require("./driver.controllers");
 
 const MODULE_PATH = "/driver";
 

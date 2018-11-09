@@ -1,4 +1,4 @@
-const AdminAccess = require("./dataAccess/admin.access");
+const AdminAccess = require("./admin.access");
 const security = require("../../lib/security");
 const ErrorEnum = require("../../lib/enums/error");
 const mailSender = require("../../lib/mailSender");
@@ -26,7 +26,7 @@ async function login(req, res) {
   }
 }
 
-recoverPassword = async (req, res) => {
+async function recoverPassword(req, res) {
   let mailOptions = mailSender.mailOptions;
   let tempPass = Math.random()
     .toString(36)
@@ -57,6 +57,6 @@ recoverPassword = async (req, res) => {
     console.error(err);
     res.status(400).send(err);
   }
-};
+}
 
-export default { login, recoverPassword };
+module.exports = { login, recoverPassword };

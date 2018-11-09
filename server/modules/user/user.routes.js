@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const userController = require("../controllers/user.controllers");
+const userController = require("./user.controllers");
 
 const MODULE_PATH = "/user";
 

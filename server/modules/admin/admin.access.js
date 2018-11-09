@@ -1,5 +1,5 @@
-const Admin = require("../models/admin.model");
-const { accessErrorHandler } = require("../../../lib/errorHandler");
+const Admin = require("./admin.model");
+const { accessErrorHandler } = require("../../lib/errorHandler");
 
 async function createAdmin(admin) {
   try {
@@ -26,4 +26,4 @@ async function findByEmail(email) {
   }
 }
 
-export default { createAdmin, updateAdmin, findByEmail };
+module.exports = { createAdmin, updateAdmin, findByEmail };

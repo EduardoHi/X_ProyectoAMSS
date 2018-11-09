@@ -1,5 +1,5 @@
-const sequelizeConnection = require("../../../lib/sequelize");
-const { UserSchema, UserOptions } = require("../../user/models/user.model");
+const sequelizeConnection = require("../../lib/sequelize");
+const { UserSchema, UserOptions } = require("../user/user.model");
 
 const Admin = sequelizeConnection.define("admin", UserSchema, UserOptions);
 

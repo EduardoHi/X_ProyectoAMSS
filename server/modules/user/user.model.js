@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
-const sequelizeConnection = require("../../../lib/sequelize");
-const security = require("../../../lib/security");
+const sequelizeConnection = require("../../lib/sequelize");
+const security = require("../../lib/security");
 
 const UserSchema = {
   id: {

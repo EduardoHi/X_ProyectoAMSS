@@ -1,9 +1,9 @@
-const UserAccess = require("./dataAccess/user.access");
+const UserAccess = require("./user.access");
 const security = require("../../lib/security");
 const mailSender = require("../../lib/mailSender");
 const ErrorEnum = require("../../lib/enums/error");
 
-exports.login = async (req, res) => {
+async function login(req, res) {
   const { email, password } = req.body;
   try {
     let user = await UserAccess.findByEmail(email);
@@ -28,9 +28,9 @@ exports.login = async (req, res) => {
     console.error(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.recoverPassword = async (req, res) => {
+async function recoverPassword(req, res) {
   let mailOptions = mailSender.mailOptions;
   let tempPass = Math.random()
     .toString(36)
@@ -61,4 +61,6 @@ exports.recoverPassword = async (req, res) => {
     console.error(err);
     res.status(400).send(err);
   }
-};
+}
+
+module.exports = { login, recoverPassword };

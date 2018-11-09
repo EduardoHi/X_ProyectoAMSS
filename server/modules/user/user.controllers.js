@@ -1,7 +1,7 @@
-const UserAccess = require("./dataAccess/user.access");
+const UserAccess = require("./user.access");
 const ErrorEnum = require("../../lib/enums/error");
 
-exports.createUser = async (req, res) => {
+async function createUser(req, res) {
   try {
     let user = await UserAccess.createUser(req.body);
     res.send(user);
@@ -9,9 +9,9 @@ exports.createUser = async (req, res) => {
     console.log(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.adminCreateUser = async (req, res) => {
+async function adminCreateUser(req, res) {
   try {
     let newUser = { ...req.body, password: "password" };
     let user = await UserAccess.createUser(newUser);
@@ -20,9 +20,9 @@ exports.adminCreateUser = async (req, res) => {
     console.log(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.getAllUsers = async (req, res) => {
+async function getAllUsers(req, res) {
   try {
     const users = await UserAccess.getAllUsers();
     res.send(users);
@@ -30,9 +30,9 @@ exports.getAllUsers = async (req, res) => {
     console.error(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.getUser = async (req, res) => {
+async function getUser(req, res) {
   try {
     let user = req.user;
     res.send(user);
@@ -40,9 +40,9 @@ exports.getUser = async (req, res) => {
     console.err(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.updateUser = async (req, res) => {
+async function updateUser(req, res) {
   try {
     let user = req.user.toJSON();
     let newValues = req.body;
@@ -55,9 +55,9 @@ exports.updateUser = async (req, res) => {
     console.log(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.deleteUser = async (req, res) => {
+async function deleteUser(req, res) {
   try {
     let { id } = req.user.toJSON();
     await UserAccess.deleteUser(id);
@@ -66,9 +66,9 @@ exports.deleteUser = async (req, res) => {
     console.log(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.getUserById = async (req, res, next, id) => {
+async function getUserById(req, res, next, id) {
   try {
     let user = await UserAccess.findById(id);
     if (!user) throw ErrorEnum.GENERIC;
@@ -78,4 +78,14 @@ exports.getUserById = async (req, res, next, id) => {
     console.error(err);
     res.status(400).send(err);
   }
+}
+
+module.exports = {
+  createUser,
+  adminCreateUser,
+  getAllUsers,
+  getUser,
+  updateUser,
+  deleteUser,
+  getUserById
 };

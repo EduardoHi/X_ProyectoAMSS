@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
-const sequelizeConnection = require("../../../lib/sequelize");
-const { UserSchema, UserOptions } = require("../../user/models/user.model");
+const sequelizeConnection = require("../../lib/sequelize");
+const { UserSchema, UserOptions } = require("../user/user.model");
 
 const DriverSchema = Object.assign(UserSchema, {
   // Fields that are only for the driver
@@ -29,4 +29,4 @@ Driver.prototype.toJSON = function() {
 
 Driver.sync();
 
-export default Driver;
+module.exports = Driver;

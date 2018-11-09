@@ -1,4 +1,4 @@
-const DriverAccess = require("./dataAccess/driver.access");
+const DriverAccess = require("./driver.access");
 
 async function createDriver(req, res) {
   try {
@@ -79,12 +79,12 @@ async function getDriverById(req, res, id) {
   }
 }
 
-export default {
+module.exports = {
   createDriver,
   deleteDriver,
   adminCreateDriver,
   getAllDrivers,
   getDriver,
   getDriverById,
-  updatedDriver
+  updateDriver
 };

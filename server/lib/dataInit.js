@@ -1,12 +1,6 @@
-const TodoAccess = require("../modules/todo/dataAccess/todo.access");
-const AdminAccess = require("../modules/admin/dataAccess/admin.access");
-const UserAccess = require("../modules/user/dataAccess/user.access");
-const DriverAccess = require("../modules/driver/dataAccess/driver.access");
-
-TodoAccess.create({
-  firstLabel: "Hello",
-  secondLabel: "World"
-});
+const AdminAccess = require("../modules/admin/admin.access");
+const UserAccess = require("../modules/user/user.access");
+const DriverAccess = require("../modules/driver/driver.access");
 
 AdminAccess.createAdmin({
   name: "Admin",

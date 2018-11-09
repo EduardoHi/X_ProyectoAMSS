@@ -1,5 +1,5 @@
-const Driver = require("../models/driver.model");
-const { accessErrorHandler } = require("../../../lib/errorHandler");
+const Driver = require("./driver.model");
+const { accessErrorHandler } = require("../../lib/errorHandler");
 
 async function createDriver(driver) {
   try {
@@ -41,7 +41,7 @@ async function deleteDriver(id) {
   }
 }
 
-export default {
+module.exports = {
   createDriver,
   updateDriver,
   getAllDrivers,
