@@ -30,6 +30,23 @@ export default class ServiceUtils {
     }
   }
 
+  static async authenticateUser() {
+    try {
+      const auth = await localforage.getItem("auth");
+      if (
+        auth &&
+        auth.token &&
+        (auth.type === this.admin ||
+          auth.type === this.customer ||
+          auth.type === this.driver)
+      )
+        return true;
+      return false;
+    } catch (err) {
+      return false;
+    }
+  }
+
   static async setAdminHeader(res) {
     try {
       await localforage.setItem("auth", {
@@ -80,6 +97,17 @@ export default class ServiceUtils {
     try {
       const authHeader = await localforage.getItem("auth");
       return { headers: { Authorization: authHeader.token } };
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  static async logout() {
+    try {
+      await localforage.removeItem("auth");
+      await localforage.removeItem("user");
+      this.currentUser = null;
+      this.currentUserType = null;
     } catch (err) {
       console.error(err);
     }

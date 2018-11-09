@@ -9,9 +9,11 @@ import Input from "../../components/actionable/Input/Input";
 
 import Card from "../../components/layout/Card/Card";
 import List from "../../components/layout/List/List";
+import Grid from "../../components/layout/Grid/Grid";
 import Logo from "../../components/layout/Logo/Logo";
 import UserAuthService from "../../services/user.auth.service";
 import AdminAuthService from "../../services/admin.auth.service";
+import Checkbox from "../../components/actionable/Checkbox/Checkbox";
 
 class Login extends Component {
   constructor(props) {
@@ -20,7 +22,10 @@ class Login extends Component {
       user: {
         email: null,
         password: null
-      }
+      },
+      isCustomer: true,
+      isDriver: false,
+      isAdmin: false
     };
   }
 
@@ -48,7 +53,61 @@ class Login extends Component {
     });
   };
 
+  login = () => {
+    const { isCustomer, isDriver, isAdmin } = this.state;
+    if (isCustomer) this.customerLogin();
+    else if (isDriver) console.log();
+    else if (isAdmin) this.adminLogin();
+  };
+
+  updateUserType = async userType => {
+    const { isCustomer, isDriver, isAdmin } = this.state;
+    if (userType === "customer") {
+      this.setState({
+        isCustomer: !isCustomer,
+        isDriver: false,
+        isAdmin: false
+      });
+    } else if (userType === "admin") {
+      this.setState({
+        isCustomer: false,
+        isDriver: false,
+        isAdmin: !isAdmin
+      });
+    } else if (userType === "driver") {
+      this.setState({
+        isCustomer: false,
+        isDriver: !isDriver,
+        isAdmin: false
+      });
+    }
+  };
+
+  getCheckboxes = () => {
+    const { isCustomer, isDriver, isAdmin } = this.state;
+    return (
+      <Grid gapSize={8} columns={3}>
+        <Checkbox
+          value={isCustomer}
+          onChange={() => this.updateUserType("customer")}
+        >
+          Cliente
+        </Checkbox>
+        <Checkbox
+          value={isDriver}
+          onChange={() => this.updateUserType("driver")}
+        >
+          Conductor
+        </Checkbox>
+        <Checkbox value={isAdmin} onChange={() => this.updateUserType("admin")}>
+          Administrador
+        </Checkbox>
+      </Grid>
+    );
+  };
+
   render() {
+    const checkboxes = this.getCheckboxes();
     return (
       <div className="Login">
         <Logo />
@@ -69,12 +128,13 @@ class Login extends Component {
               linkName={"¿Olvidaste tu contraseña?"}
               onChange={value => this.updateValue({ password: value })}
             />
+            {checkboxes}
           </List>
           <p>
             ¿Aún no tienes una cuenta?{" "}
             <Link to="/account-type">Regístrate aquí</Link>.
           </p>
-          <Button onClick={this.adminLogin}>Entrar</Button>
+          <Button onClick={this.login}>Entrar</Button>
         </Card>
       </div>
     );

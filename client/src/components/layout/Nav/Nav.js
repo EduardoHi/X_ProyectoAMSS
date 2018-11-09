@@ -9,6 +9,7 @@ import "./Nav.css";
 import Logo from "../Logo/Logo";
 import List from "../List/List";
 import Button from "../../actionable/Button/Button";
+import ServiceUtils from "../../../lib/ServiceUtils";
 
 export function NavLink(props) {
   return (
@@ -21,8 +22,7 @@ export function NavLink(props) {
 class Nav extends Component {
   logout = async () => {
     try {
-      await localforage.removeItem("user");
-      await localforage.removeItem("auth");
+      await ServiceUtils.logout();
       this.props.history.push("/login");
     } catch (err) {
       console.error(err);

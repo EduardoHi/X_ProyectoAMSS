@@ -28,13 +28,15 @@ class Home extends Component {
       adminBottomPages: [
         { link: `${this.props.match.url}/history`, name: "Historial" },
         { link: `${this.props.match.url}/configuration`, name: "Configuración" }
-      ]
+      ],
+      customerTopPages: [],
+      customerBottomPages: []
     };
   }
 
   async componentWillMount() {
     try {
-      const authenticated = await ServiceUtils.authenticateAdmin();
+      const authenticated = await ServiceUtils.authenticateUser();
       if (!authenticated) {
         this.props.history.push("/login");
         return;
@@ -52,12 +54,18 @@ class Home extends Component {
   }
 
   getPagesToDisplay = () => {
-    if (this.state.user.type === "admin")
+    const { type } = this.state.user;
+    if (type === "admin")
       return {
         topPages: this.state.adminTopPages,
         bottomPages: this.state.adminBottomPages
       };
-    return { topPages: [], bottomPages: [] };
+    else if (type === "customer")
+      return {
+        topPages: this.state.customerTopPages,
+        bottomPages: this.state.customerBottomPages
+      };
+    else return { topPages: [], bottomPages: [] };
   };
 
   render() {
@@ -68,6 +76,7 @@ class Home extends Component {
           user={this.state.user}
           topPages={topPages}
           bottomPages={bottomPages}
+          logout={() => this.logout}
         />
         <div className="MainContainer">
           <div className="MainContainerMargin">
