@@ -1,6 +1,6 @@
-const DriverAccess = require("../dataAccess/driver.access");
+const DriverAccess = require("./dataAccess/driver.access");
 
-exports.createDriver = async (req, res) => {
+async function createDriver(req, res) {
   try {
     let driver = await DriverAccess.createDriver(req.body);
     res.send(driver);
@@ -8,9 +8,9 @@ exports.createDriver = async (req, res) => {
     console.log(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.adminCreateDriver = async (req, res) => {
+async function adminCreateDriver(req, res) {
   try {
     let newDriver = { ...req.body, password: "password" };
     let driver = await DriverAccess.createDriver(newDriver);
@@ -19,9 +19,9 @@ exports.adminCreateDriver = async (req, res) => {
     console.log(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.getAllDrivers = async (req, res) => {
+async function getAllDrivers(req, res) {
   try {
     const drivers = await DriverAccess.getAllDrivers();
     res.send(drivers);
@@ -29,9 +29,9 @@ exports.getAllDrivers = async (req, res) => {
     console.error(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.getDriver = async (req, res) => {
+async function getDriver(req, res) {
   try {
     let driver = req.driver;
     res.send(driver);
@@ -39,9 +39,9 @@ exports.getDriver = async (req, res) => {
     console.err(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.updateDriver = async (req, res) => {
+async function updateDriver(req, res) {
   try {
     let driver = req.driver.toJSON();
     let newValues = req.body;
@@ -54,9 +54,9 @@ exports.updateDriver = async (req, res) => {
     console.log(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.deleteDriver = async (req, res) => {
+async function deleteDriver(req, res) {
   try {
     let { id } = req.driver.toJSON();
     await DriverAccess.deleteDriver(id);
@@ -65,9 +65,9 @@ exports.deleteDriver = async (req, res) => {
     console.log(err);
     res.status(400).send(err);
   }
-};
+}
 
-exports.getDriverById = async (req, res, next, id) => {
+async function getDriverById(req, res, id) {
   try {
     let driver = await DriverAccess.getById(id);
     if (!driver) throw "Not found";
@@ -77,4 +77,14 @@ exports.getDriverById = async (req, res, next, id) => {
     console.error(err);
     res.status(400).send(err);
   }
+}
+
+export default {
+  createDriver,
+  deleteDriver,
+  adminCreateDriver,
+  getAllDrivers,
+  getDriver,
+  getDriverById,
+  updatedDriver
 };
