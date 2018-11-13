@@ -8,7 +8,6 @@ export default class DriverAuthService {
   static async login(driver) {
     try {
       const res = await axios.post(this.MODULE_PATH + "/", driver);
-      console.log("res", res);
       return await ServiceUtils.setDriverHeader(res);
     } catch (err) {
       throw ServiceUtils.handleError(err);

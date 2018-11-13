@@ -5,7 +5,6 @@ const mailSender = require("../../lib/mailSender");
 
 async function login(req, res) {
   const { email, password } = req.body;
-  console.log(email);
   try {
     let driver = await DriverAccess.findByEmail(email);
     if (!driver) {

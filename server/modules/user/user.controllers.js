@@ -6,7 +6,7 @@ async function createUser(req, res) {
     let user = await UserAccess.createUser(req.body);
     res.send(user);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).send(err);
   }
 }
@@ -17,7 +17,7 @@ async function adminCreateUser(req, res) {
     let user = await UserAccess.createUser(newUser);
     res.send(user);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).send(err);
   }
 }
@@ -37,7 +37,7 @@ async function getUser(req, res) {
     let user = req.user;
     res.send(user);
   } catch (err) {
-    console.err(err);
+    console.error(err);
     res.status(400).send(err);
   }
 }
@@ -52,7 +52,7 @@ async function updateUser(req, res) {
     let updatedUser = await UserAccess.updateUser(user);
     res.send(updatedUser);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).send(err);
   }
 }
@@ -63,7 +63,7 @@ async function deleteUser(req, res) {
     await UserAccess.deleteUser(id);
     res.send({});
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).send(err);
   }
 }

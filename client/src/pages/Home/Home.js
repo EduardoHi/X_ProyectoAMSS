@@ -44,7 +44,6 @@ class Home extends Component {
         return;
       }
       const userData = await ServiceUtils.getUser();
-      console.log("userData", userData);
       this.setState({
         user: {
           data: userData.user,
@@ -78,7 +77,6 @@ class Home extends Component {
 
   render() {
     let { topPages, bottomPages } = this.getPagesToDisplay();
-    console.log(this.state);
     return (
       <div className="Home">
         <Nav
