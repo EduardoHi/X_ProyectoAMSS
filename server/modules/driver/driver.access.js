@@ -33,6 +33,14 @@ async function getById(id) {
   }
 }
 
+async function findByEmail(email) {
+  try {
+    return await Driver.findOne({ where: { email } });
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+}
+
 async function deleteDriver(id) {
   try {
     return await Driver.destroy({ where: { id } });
@@ -46,5 +54,6 @@ module.exports = {
   updateDriver,
   getAllDrivers,
   getById,
-  deleteDriver
+  deleteDriver,
+  findByEmail
 };

@@ -13,7 +13,8 @@ const routes = [
   require("./admin/admin.auth.routes"),
   require("./user/user.routes"),
   require("./user/user.auth.routes"),
-  require("./driver/driver.routes")
+  require("./driver/driver.routes"),
+  require("./driver/driver.auth.routes")
 ];
 
 // use routes on modules

@@ -12,6 +12,7 @@ module.exports = {
     usecurePaths: [
       "/api/auth-admin/",
       "/api/auth-user/",
+      "/api/auth-driver/",
       "/api/driver/",
       "/api/user/"
     ]

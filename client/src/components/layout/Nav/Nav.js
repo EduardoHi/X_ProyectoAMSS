@@ -52,6 +52,8 @@ class Nav extends Component {
       <></>
     );
 
+    console.log(this.props);
+
     return (
       <div className="Nav">
         <List>

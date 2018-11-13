@@ -30,7 +30,9 @@ class Home extends Component {
         { link: `${this.props.match.url}/configuration`, name: "Configuración" }
       ],
       customerTopPages: [],
-      customerBottomPages: []
+      customerBottomPages: [],
+      driverTopPages: [],
+      driverBottomPages: []
     };
   }
 
@@ -42,6 +44,7 @@ class Home extends Component {
         return;
       }
       const userData = await ServiceUtils.getUser();
+      console.log("userData", userData);
       this.setState({
         user: {
           data: userData.user,
@@ -65,11 +68,17 @@ class Home extends Component {
         topPages: this.state.customerTopPages,
         bottomPages: this.state.customerBottomPages
       };
+    else if (type === "driver")
+      return {
+        topPages: this.state.driverTopPages,
+        bottomPages: this.state.driverBottomPages
+      };
     else return { topPages: [], bottomPages: [] };
   };
 
   render() {
     let { topPages, bottomPages } = this.getPagesToDisplay();
+    console.log(this.state);
     return (
       <div className="Home">
         <Nav

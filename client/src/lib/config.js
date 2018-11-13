@@ -1,5 +1,5 @@
 const Config = {
-  serverURL: "http://localhost:3000",
+  serverURL: "http://localhost:3001",
   apiURL: () => Config.serverURL + "/api"
 };
 
