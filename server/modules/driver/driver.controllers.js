@@ -67,7 +67,7 @@ async function deleteDriver(req, res) {
   }
 }
 
-async function getDriverById(req, res, id) {
+async function getDriverById(req, res, next, id) {
   try {
     let driver = await DriverAccess.getById(id);
     if (!driver) throw "Not found";

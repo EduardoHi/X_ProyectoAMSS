@@ -10,6 +10,8 @@ module.exports = {
     credentialsRequired: true,
     secret: "why-so-serioussss",
     usecurePaths: [
+      "/api/auth-admin/recoverPassword",
+      "/api/auth-user/recoverPassword",
       "/api/auth-admin/",
       "/api/auth-user/",
       "/api/driver/",

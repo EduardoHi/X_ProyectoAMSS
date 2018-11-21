@@ -18,6 +18,14 @@ async function updateAdmin(admin) {
   }
 }
 
+async function findById(id) {
+  try {
+    return await Admin.findOne({ where: { id } });
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+}
+
 async function findByEmail(email) {
   try {
     return await Admin.findOne({ where: { email } });
@@ -26,4 +34,4 @@ async function findByEmail(email) {
   }
 }
 
-module.exports = { createAdmin, updateAdmin, findByEmail };
+module.exports = { createAdmin, updateAdmin, findById, findByEmail };

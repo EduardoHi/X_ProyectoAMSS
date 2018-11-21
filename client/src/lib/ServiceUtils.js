@@ -30,6 +30,15 @@ export default class ServiceUtils {
     }
   }
 
+  static async setUser(user) {
+    try {
+      this.currentUser = user;
+      await localforage.setItem("user", user);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   static async authenticateUser() {
     try {
       const auth = await localforage.getItem("auth");
