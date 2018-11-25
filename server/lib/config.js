@@ -14,6 +14,7 @@ module.exports = {
       "/api/auth-user/recoverPassword",
       "/api/auth-admin/",
       "/api/auth-user/",
+      "/api/auth-driver/",
       "/api/driver/",
       "/api/user/"
     ]

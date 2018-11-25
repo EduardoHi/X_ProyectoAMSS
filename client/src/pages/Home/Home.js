@@ -31,7 +31,9 @@ class Home extends Component {
         { link: `${this.props.match.url}/configuration`, name: "Configuración" }
       ],
       customerTopPages: [],
-      customerBottomPages: []
+      customerBottomPages: [],
+      driverTopPages: [],
+      driverBottomPages: []
     };
   }
 
@@ -65,6 +67,11 @@ class Home extends Component {
       return {
         topPages: this.state.customerTopPages,
         bottomPages: this.state.customerBottomPages
+      };
+    else if (type === "driver")
+      return {
+        topPages: this.state.driverTopPages,
+        bottomPages: this.state.driverBottomPages
       };
     else return { topPages: [], bottomPages: [] };
   };

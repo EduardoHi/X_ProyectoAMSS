@@ -20,11 +20,11 @@ export default class ServiceUtils {
   static async getUser() {
     if (this.currentUser && this.currentUserType)
       return { user: this.currentUser, userType: this.currentUserType };
+
     try {
       this.currentUser = await localforage.getItem("user");
       const auth = await localforage.getItem("auth");
-      this.currentUserType = auth.type;
-      return { user: this.currentUser, userType: this.currentUserType };
+      return { user: this.currentUser, userType: auth.type };
     } catch (err) {
       console.error(err);
     }
@@ -73,6 +73,29 @@ export default class ServiceUtils {
     try {
       const auth = await localforage.getItem("auth");
       if (auth && auth.token && auth.type === this.admin) return true;
+      return false;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  static async setDriverHeader(res) {
+    try {
+      await localforage.setItem("auth", {
+        token: "Bearer " + res.data.token,
+        type: this.driver
+      });
+      await localforage.setItem("user", res.data.driver);
+      return res.data.driver;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  static async authenticateCustomer() {
+    try {
+      const auth = await localforage.getItem("auth");
+      if (auth && auth.token && auth.type === this.driver) return true;
       return false;
     } catch (err) {
       return false;

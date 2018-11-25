@@ -5,7 +5,7 @@ async function createDriver(req, res) {
     let driver = await DriverAccess.createDriver(req.body);
     res.send(driver);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).send(err);
   }
 }
@@ -16,7 +16,7 @@ async function adminCreateDriver(req, res) {
     let driver = await DriverAccess.createDriver(newDriver);
     res.send(driver);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).send(err);
   }
 }
@@ -36,7 +36,7 @@ async function getDriver(req, res) {
     let driver = req.driver;
     res.send(driver);
   } catch (err) {
-    console.err(err);
+    console.error(err);
     res.status(400).send(err);
   }
 }
@@ -51,7 +51,7 @@ async function updateDriver(req, res) {
     let updatedDriver = await DriverAccess.updateDriver(driver);
     res.send(updatedDriver);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).send(err);
   }
 }
@@ -62,7 +62,7 @@ async function deleteDriver(req, res) {
     await DriverAccess.deleteDriver(id);
     res.send({});
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).send(err);
   }
 }

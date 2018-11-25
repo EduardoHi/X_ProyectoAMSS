@@ -13,6 +13,7 @@ import Grid from "../../components/layout/Grid/Grid";
 import Logo from "../../components/layout/Logo/Logo";
 import UserAuthService from "../../services/user.auth.service";
 import AdminAuthService from "../../services/admin.auth.service";
+import DriverAuthService from "../../services/driver.auth.service";
 import Checkbox from "../../components/actionable/Checkbox/Checkbox";
 
 class Login extends Component {
@@ -47,6 +48,15 @@ class Login extends Component {
     }
   };
 
+  driverLogin = async () => {
+    try {
+      await DriverAuthService.login(this.state.user);
+      this.props.history.push("/app");
+    } catch (err) {
+      this.props.alert({ error: true, message: err.display });
+    }
+  };
+
   updateValue = value => {
     this.setState({
       user: { ...this.state.user, ...value }
@@ -56,7 +66,7 @@ class Login extends Component {
   login = () => {
     const { isCustomer, isDriver, isAdmin } = this.state;
     if (isCustomer) this.customerLogin();
-    else if (isDriver) console.log();
+    else if (isDriver) this.driverLogin();
     else if (isAdmin) this.adminLogin();
   };
 
