@@ -19,4 +19,12 @@ const ErrorHandler = {
   }
 };
 
-module.exports = ErrorHandler;
+async function accessWithTry(fun) {
+  try {
+    return await fun;
+  } catch (err) {
+    throw ErrorHandler.accessErrorHandler(err);
+  }
+}
+
+module.exports = { ErrorHandler, accessWithTry };

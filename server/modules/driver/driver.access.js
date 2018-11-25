@@ -1,52 +1,30 @@
 const Driver = require("./driver.model");
-const { accessErrorHandler } = require("../../lib/errorHandler");
+const { accessErrorHandler, accessWithTry } = require("../../lib/errorHandler");
 
 async function createDriver(driver) {
-  try {
-    return await Driver.create(driver);
-  } catch (err) {
-    throw accessErrorHandler(err);
-  }
+  return await accessWithTry(Driver.create(driver));
 }
 
 async function updateDriver(driver) {
-  try {
-    return await Driver.update(driver, { where: { id: driver.id } });
-  } catch (err) {
-    throw accessErrorHandler(err);
-  }
+  return await accessWithTry(
+    Driver.update(driver, { where: { id: driver.id } })
+  );
 }
 
 async function getAllDrivers() {
-  try {
-    return await Driver.findAll();
-  } catch (err) {
-    throw accessErrorHandler(err);
-  }
+  return await accessWithTry(Driver.findAll());
 }
 
 async function getById(id) {
-  try {
-    return await Driver.findOne({ where: { id } });
-  } catch (err) {
-    throw accessErrorHandler(err);
-  }
+  return await accessWithTry(Driver.findOne({ where: { id } }));
 }
 
 async function findByEmail(email) {
-  try {
-    return await Driver.findOne({ where: { email } });
-  } catch (err) {
-    throw accessErrorHandler(err);
-  }
+  return await accessWithTry(Driver.findOne({ where: { email } }));
 }
 
 async function deleteDriver(id) {
-  try {
-    return await Driver.destroy({ where: { id } });
-  } catch (err) {
-    throw accessErrorHandler(err);
-  }
+  return await accessWithTry(Driver.destroy({ where: { id } }));
 }
 
 module.exports = {

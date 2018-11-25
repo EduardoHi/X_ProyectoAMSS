@@ -1,53 +1,28 @@
 const { User } = require("./user.model");
-const { accessErrorHandler } = require("../../lib/errorHandler");
+const { accessWithTry } = require("../../lib/errorHandler");
 
 async function createUser(user) {
-  try {
-    return await User.create(user);
-  } catch (err) {
-    console.error(err);
-    throw accessErrorHandler(err);
-  }
+  return await accessWithTry(User.create(user));
 }
 
 async function updateUser(user) {
-  try {
-    return await User.update(user, { where: { id: user.id } });
-  } catch (err) {
-    throw accessErrorHandler(err);
-  }
+  return await accessWithTry(User.update(user, { where: { id: user.id } }));
 }
 
 async function getAllUsers() {
-  try {
-    return await User.findAll();
-  } catch (err) {
-    throw accessErrorHandler(err);
-  }
+  return await accessWithTry(User.findAll());
 }
 
 async function findById(id) {
-  try {
-    return await User.findOne({ where: { id } });
-  } catch (err) {
-    throw accessErrorHandler(err);
-  }
+  return await accessWithTry(User.findOne({ where: { id } }));
 }
 
 async function findByEmail(email) {
-  try {
-    return await User.findOne({ where: { email } });
-  } catch (err) {
-    throw accessErrorHandler(err);
-  }
+  return await accessWithTry(User.findOne({ where: { email } }));
 }
 
 async function deleteUser(id) {
-  try {
-    return await User.destroy({ where: { id } });
-  } catch (err) {
-    throw accessErrorHandler(err);
-  }
+  return await accessWithTry(User.destroy({ where: { id } }));
 }
 
 module.exports = {
