@@ -10,6 +10,7 @@ import Customers from "../Customers/Customers";
 import Drivers from "../Drivers/Drivers";
 import Customer from "../Customer/Customer";
 import Driver from "../Driver/Driver";
+import Profile from "../Profile/Profile";
 
 class Home extends Component {
   constructor(props) {
@@ -87,6 +88,16 @@ class Home extends Component {
         />
         <div className="MainContainer">
           <div className="MainContainerMargin">
+            <Route
+              exact
+              path={`${this.props.match.url}/profile`}
+              render={() => (
+                <Profile
+                  alert={async data => this.props.alert(data)}
+                  loading={loading => this.props.loading(loading)}
+                />
+              )}
+            />
             <Route
               exact
               path={`${this.props.match.url}/customers`}

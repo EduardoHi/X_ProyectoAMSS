@@ -1,7 +1,7 @@
 const UserAccess = require("./user.access");
 const security = require("../../lib/security");
-const mailSender = require("../../lib/mailSender");
 const ErrorEnum = require("../../lib/enums/error");
+const mailSender = require("../../lib/mail/mailSender");
 
 async function login(req, res) {
   const { email, password } = req.body;
@@ -36,8 +36,7 @@ async function recoverPassword(req, res) {
     .toString(36)
     .substring(2, 15);
   mailOptions.to = req.body.email;
-  mailOptions.subject = "Restablecimiento de contraseña";
-  mailOptions.text = `La contraseña temporal de acceso es ${tempPass}`;
+  mailOptions.subject = "Restablecimiento de Contraseña";
 
   try {
     let user = await UserAccess.findByEmail(req.body.email);
@@ -45,6 +44,17 @@ async function recoverPassword(req, res) {
     if (!user) {
       throw ErrorEnum.NO_USER_FOUND_WITH_MAIL;
     }
+
+    res.render(
+      "recoverPassword",
+      {
+        title: mailOptions.subject,
+        newPassword: tempPass
+      },
+      (err, html) => {
+        mailOptions.html = html;
+      }
+    );
 
     user = user.toJSON();
 

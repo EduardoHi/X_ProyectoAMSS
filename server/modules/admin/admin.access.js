@@ -9,8 +9,16 @@ async function updateAdmin(admin) {
   return await accessWithTry(Admin.update(admin, { where: { id: admin.id } }));
 }
 
+async function findById(id) {
+  try {
+    return await Admin.findOne({ where: { id } });
+  } catch (err) {
+    throw accessErrorHandler(err);
+  }
+}
+
 async function findByEmail(email) {
   return await accessWithTry(Admin.findOne({ where: { email } }));
 }
 
-module.exports = { createAdmin, updateAdmin, findByEmail };
+module.exports = { createAdmin, updateAdmin, findById, findByEmail };

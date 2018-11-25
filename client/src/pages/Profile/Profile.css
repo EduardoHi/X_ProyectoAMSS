@@ -1,0 +1,4 @@
+.Profile > .BottomAcceptButton {
+  display: flex;
+  flex-direction: row-reverse;
+}

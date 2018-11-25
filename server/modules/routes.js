@@ -11,6 +11,7 @@ router.get(MODULE_PATH + "/", function(req, res, next) {
 // routes of Modules
 const routes = [
   require("./admin/admin.auth.routes"),
+  require("./admin/admin.routes"),
   require("./user/user.routes"),
   require("./user/user.auth.routes"),
   require("./driver/driver.routes"),

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import withRouter from "react-router-dom/withRouter";
 
-import localforage from "localforage";
-
 import "./Nav.css";
 
 import Logo from "../Logo/Logo";
@@ -61,7 +59,7 @@ class Nav extends Component {
           {bottomPages}
         </List>
         <div className="NavFooter">
-          <NavLink to={"/profile"}>{this.props.user.data.name}</NavLink>
+          <NavLink to={"/app/profile"}>{this.props.user.data.name}</NavLink>
           <Button onClick={this.logout}>Cerrar Sesión</Button>
         </div>
       </div>
