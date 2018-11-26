@@ -11,6 +11,7 @@ import Drivers from "../Drivers/Drivers";
 import Customer from "../Customer/Customer";
 import Driver from "../Driver/Driver";
 import Profile from "../Profile/Profile";
+import RequestService from "../RequestService/RequestService";
 
 class Home extends Component {
   constructor(props) {
@@ -30,7 +31,9 @@ class Home extends Component {
         { link: `${this.props.match.url}/history`, name: "Historial" },
         { link: `${this.props.match.url}/configuration`, name: "Configuración" }
       ],
-      customerTopPages: [],
+      customerTopPages: [
+        { link: `${this.props.match.url}/trip`, name: "Nuevo viaje" }
+      ],
       customerBottomPages: [],
       driverTopPages: [],
       driverBottomPages: []
@@ -132,6 +135,16 @@ class Home extends Component {
               path={`${this.props.match.url}/drivers/:driverId`}
               render={() => (
                 <Driver
+                  alert={async data => this.props.alert(data)}
+                  loading={loading => this.props.loading(loading)}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={`${this.props.match.url}/trip`}
+              render={() => (
+                <RequestService
                   alert={async data => this.props.alert(data)}
                   loading={loading => this.props.loading(loading)}
                 />
