@@ -7,10 +7,9 @@ import AccountType from "./pages/AccountType/AccountType";
 import RecoverPassword from "./pages/RecoverPassword/RecoverPassword";
 import DriverRegister from "./pages/DriverRegister/DriverRegister";
 
-import Alert from "./components/utility/alert/Alert";
+import { Alert, Loading } from "./components/utility";
 import Home from "./pages/Home/Home";
 import CustomerRegister from "./pages/CustomerRegister/CustomerRegister";
-import Loading from "./components/utility/loading/Loading";
 
 class App extends Component {
   constructor(props) {
