@@ -1,4 +1,4 @@
-const Trip = require("./Trip.model");
+const Trip = require("./trip.model");
 const { User } = require("../user/user.model");
 const { accessWithTry } = require("../../lib/errorHandler");
 

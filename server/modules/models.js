@@ -4,8 +4,8 @@ const Driver = require("./driver/driver.model");
 const Trip = require("./trip/trip.model");
 
 // DB Relationships
-Trip.belongsTo(User);
-User.hasMany(Trip);
+Trip.belongsTo(User, { as: 'user', foreignKey: 'userId' });
+User.hasMany(Trip, { as: 'trips', foreignKey: 'userId' });
 
-Trip.belongsTo(Driver);
-Driver.hasMany(Trip);
+Trip.belongsTo(Driver, { as: 'driver', foreignKey: 'driverId' });
+Driver.hasMany(Trip, { as: 'trips', foreignKey: 'driverId' });
