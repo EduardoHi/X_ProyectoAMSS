@@ -11,6 +11,8 @@ import Drivers from "../Drivers/Drivers";
 import Customer from "../Customer/Customer";
 import Driver from "../Driver/Driver";
 import Profile from "../Profile/Profile";
+import TripRequests from "../TripRequests/TripRequests";
+import RequestTrip from "../RequestTrip/RequestTrip";
 
 class Home extends Component {
   constructor(props) {
@@ -27,10 +29,19 @@ class Home extends Component {
         { link: `${this.props.match.url}/drivers`, name: "Conductores" }
       ],
       adminBottomPages: [
+        {
+          link: `${this.props.match.url}/trip-requests`,
+          name: "Solicitudes de Viaje"
+        },
         { link: `${this.props.match.url}/history`, name: "Historial" },
         { link: `${this.props.match.url}/configuration`, name: "Configuración" }
       ],
-      customerTopPages: [],
+      customerTopPages: [
+        {
+          link: `${this.props.match.url}/request-trip`,
+          name: "Solicitar Viaje"
+        }
+      ],
       customerBottomPages: [],
       driverTopPages: [],
       driverBottomPages: []
@@ -132,6 +143,26 @@ class Home extends Component {
               path={`${this.props.match.url}/drivers/:driverId`}
               render={() => (
                 <Driver
+                  alert={async data => this.props.alert(data)}
+                  loading={loading => this.props.loading(loading)}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={`${this.props.match.url}/request-trip`}
+              render={() => (
+                <RequestTrip
+                  alert={async data => this.props.alert(data)}
+                  loading={loading => this.props.loading(loading)}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={`${this.props.match.url}/trip-requests`}
+              render={() => (
+                <TripRequests
                   alert={async data => this.props.alert(data)}
                   loading={loading => this.props.loading(loading)}
                 />

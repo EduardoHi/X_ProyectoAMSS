@@ -22,17 +22,23 @@ export default class Input extends Component {
   };
 
   render() {
-    let textFields =
-      this.props.link && this.props.linkName ? (
-        <div>
-          <p>{this.props.name}</p>
-          <Link to={this.props.link}>{this.props.linkName}</Link>
-        </div>
-      ) : (
-          <div>
-            <p>{this.props.name}</p>
-          </div>
-        );
+    let link;
+    if (this.props.link && this.props.linkName) {
+      link = <Link to={this.props.link}>{this.props.linkName}</Link>;
+    } else if (!this.props.link && this.props.linkName) {
+      link = <p>{this.props.linkName}</p>;
+    }
+
+    let textFields = this.props.linkName ? (
+      <div>
+        <p>{this.props.name}</p>
+        {link}
+      </div>
+    ) : (
+      <div>
+        <p>{this.props.name}</p>
+      </div>
+    );
     return (
       <div className="Input">
         <input
@@ -50,6 +56,7 @@ export default class Input extends Component {
 
 const patterns = {
   email: "^([a-zA-Z0-9 _-.]+)@([a-zA-Z0-9_-.]+).([a-zA-Z]{2,5})",
+  hour: "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]",
   password: ".{6,}",
-  anything: ".",
-}
+  anything: "."
+};

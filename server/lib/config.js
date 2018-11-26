@@ -5,7 +5,7 @@ module.exports = {
     password: "",
     host: "localhost"
   },
-  dropAndCreate: true,
+  dropAndCreate: false,
   jwt: {
     credentialsRequired: true,
     secret: "why-so-serioussss",

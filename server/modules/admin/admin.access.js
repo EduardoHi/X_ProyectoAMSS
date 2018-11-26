@@ -1,5 +1,5 @@
 const Admin = require("./admin.model");
-const { accessErrorHandler } = require("../../lib/errorHandler");
+const { accessErrorHandler, accessWithTry } = require("../../lib/errorHandler");
 
 async function createAdmin(admin) {
   return await accessWithTry(Admin.create(admin));

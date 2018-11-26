@@ -97,7 +97,7 @@ class Profile extends Component {
 
   renderProfile = () => {
     const { user, editing } = this.state;
-    if (this.userType === "driver") {
+    if (this.state.userType === "driver") {
       return (
         <DriverCard
           editing={editing}
