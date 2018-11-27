@@ -1,33 +1,19 @@
-const nodemailer = require("nodemailer");
-
-var transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "", // correo que envia el mail
-    pass: "" // contraseña del correo
-  }
-});
+const sendmail = require('sendmail')();
 
 exports.mailOptions = {
-  from: "", // correo que envía el mail
+  from: "no-reply@transpais.com",
   to: "",
   subject: "",
-  text: "",
   html: ""
 };
 
 exports.sendMail = mailOptions => {
-  try {
-    let err;
-    transporter.sendMail(mailOptions, function(error, info) {
-      if (error) {
-        err = error;
-      }
-    });
+  sendmail(mailOptions, function (err, reply) {
+    console.log(err && err.stack);
+    console.dir(reply);
     if (err) {
       throw err;
     }
-  } catch (err) {
-    return err;
-  }
-};
+  });
+}
+

@@ -43,7 +43,9 @@ class Home extends Component {
           name: "Solicitar Viaje"
         }
       ],
-      customerBottomPages: [],
+      customerBottomPages: [
+        { link: `${this.props.match.url}/configuration`, name: "Configuración" }
+      ],
       driverTopPages: [],
       driverBottomPages: []
     };

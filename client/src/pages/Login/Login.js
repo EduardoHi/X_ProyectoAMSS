@@ -116,6 +116,15 @@ class Login extends Component {
     );
   };
 
+  getUserType() {
+    if (this.state.isAdmin)
+      return 'admin';
+    if (this.state.isCustomer)
+      return 'customer';
+    if (this.state.isDriver)
+      return 'driver';
+  }
+
   render() {
     const checkboxes = this.getCheckboxes();
     return (
@@ -134,7 +143,7 @@ class Login extends Component {
               type={"password"}
               name={"Contraseña"}
               placeholder={"Contraseña"}
-              link={"/recover-password"}
+              link={`/recover-password/${this.getUserType()}`}
               linkName={"¿Olvidaste tu contraseña?"}
               onChange={value => this.updateValue({ password: value })}
             />

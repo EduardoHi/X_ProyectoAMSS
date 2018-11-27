@@ -16,7 +16,16 @@ async function getAllTrips() {
 
 async function getAllTripsWhere(query) {
   return await accessWithTry(
-    Trip.findAll({ where: query, include: [{ model: User, as: "user" }] })
+    Trip.findAll({
+      where: query,
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "name"]
+        }
+      ]
+    })
   );
 }
 

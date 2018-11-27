@@ -1,7 +1,7 @@
 const DriverAccess = require("./driver.access");
 const security = require("../../lib/security");
 const ErrorEnum = require("../../lib/enums/error");
-const mailSender = require("../../lib/mailSender");
+const mailSender = require("../../lib/mail/mailSender");
 
 async function login(req, res) {
   const { email, password } = req.body;
@@ -35,11 +35,8 @@ recoverPassword = async (req, res) => {
     .toString(36)
     .substring(2, 15);
 
-  const options = new mailOptions()
-    .setTo(req.body.email)
-    .setSubject("Reestablecimiento de contraseña")
-    .setText(`La contraseña temporal de acceso es ${tempPass}`)
-    .toOptions();
+  mailOptions.to = req.body.email;
+  mailOptions.subject = "Restablecimiento de Contraseña";
 
   try {
     let driver = await DriverAccess.findByEmail(req.body.email);
@@ -48,12 +45,23 @@ recoverPassword = async (req, res) => {
       throw ErrorEnum.NO_USER_FOUND_WITH_MAIL;
     }
 
+    res.render(
+      "recoverPassword",
+      {
+        title: mailOptions.subject,
+        newPassword: tempPass
+      },
+      (err, html) => {
+        mailOptions.html = html;
+      }
+    );
+
     driver = driver.toJSON();
 
     driver.password = await security.hashPassword(tempPass);
 
     driver = await DriverAccess.updateDriver(driver);
-    mailSender.sendMail(options);
+    mailSender.sendMail(mailOptions);
     res.send("Correo enviado con éxito");
   } catch (err) {
     console.error(err);

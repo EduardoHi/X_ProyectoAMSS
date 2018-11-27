@@ -38,7 +38,7 @@ class mailOptions {
 }
 
 function sendMail(mailOptions) {
-  transporter.sendMail(mailOptions, function(error, info) {
+  transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       throw error;
     }

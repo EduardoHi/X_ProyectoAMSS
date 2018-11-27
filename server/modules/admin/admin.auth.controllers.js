@@ -56,13 +56,9 @@ async function recoverPassword(req, res) {
 
     admin.password = await security.hashPassword(tempPass);
 
-    AdminAccess.updateAdmin(admin)
-      .then(admin => {
-        mailSender.sendMail(mailOptions);
-      })
-      .then(() => {
-        res.send("Correo enviado con éxito");
-      });
+    await AdminAccess.updateAdmin(admin)
+    mailSender.sendMail(mailOptions);
+    res.send("Correo enviado con éxito.")
   } catch (err) {
     console.error(err);
     res.status(400).send(err);
