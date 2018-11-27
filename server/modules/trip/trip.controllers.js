@@ -1,4 +1,5 @@
 const TripAccess = require("./trip.access");
+const DriverAccess = require("../driver/driver.access");
 const ErrorEnum = require("../../lib/enums/error");
 
 async function createTrip(req, res) {
@@ -36,6 +37,16 @@ async function getTrip(req, res) {
   try {
     let trip = req.trip;
     res.send(trip);
+  } catch (err) {
+    console.error(err);
+    res.status(400).send(err);
+  }
+}
+
+async function getTripWithDrivers(req, res) {
+  try {
+    const drivers = await DriverAccess.getAllDrivers();
+    res.send({ drivers, trip: req.trip });
   } catch (err) {
     console.error(err);
     res.status(400).send(err);
@@ -85,6 +96,7 @@ module.exports = {
   getAllTrips,
   getAllTripRequests,
   getTrip,
+  getTripWithDrivers,
   updateTrip,
   deleteTrip,
   getTripById

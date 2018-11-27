@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import withRouter from "react-router-dom/withRouter";
 import "./RequestTrip.css";
 
+import * as _ from "lodash";
+
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
 
@@ -22,10 +24,11 @@ class RequestTrip extends Component {
     super(props);
     this.state = {
       trip: {
+        originAddress: "",
         originLat: null,
         originLng: null,
-        destinationLat: 25.6876154,
-        destinationLng: -100.325244,
+        destinationLat: null,
+        destinationLng: null,
         date: Date.now(),
         day: null,
         hour: null
@@ -64,13 +67,23 @@ class RequestTrip extends Component {
 
   changeDestination = value => {
     const central = this.state.centrales.find(cent => cent.name === value);
-    this.setState({
-      trip: {
-        ...this.state.trip,
-        destinationLat: central.lat,
-        destinationLng: central.lng
-      }
-    });
+    if (central) {
+      this.setState({
+        trip: {
+          ...this.state.trip,
+          destinationLat: central.lat,
+          destinationLng: central.lng
+        }
+      });
+    } else {
+      this.setState({
+        trip: {
+          ...this.state.trip,
+          destinationLat: null,
+          destinationLng: null
+        }
+      });
+    }
   };
 
   handleDayClick = day => {
@@ -103,8 +116,27 @@ class RequestTrip extends Component {
     }
   };
 
+  changeOriginAddress = _.debounce(value => {
+    this.setState({ trip: { ...this.state.trip, originAddress: value } });
+  }, 1000);
+
+  changeOrigin = address => {
+    if (address[0].geometry && address[0].geometry.location) {
+      this.setState({
+        trip: {
+          ...this.state.trip,
+          originAddress: address[0].formatted_address,
+          originLat: address[0].geometry.location.lat(),
+          originLng: address[0].geometry.location.lng()
+        }
+      });
+      console.log(this.state.trip);
+    }
+  };
+
   render() {
     const {
+      originAddress,
       originLat,
       originLng,
       destinationLat,
@@ -117,7 +149,13 @@ class RequestTrip extends Component {
         ? { lat: destinationLat, lng: destinationLng }
         : null;
     const map = origin ? (
-      <Map origin={origin} destination={destination} center={origin} />
+      <Map
+        originAddress={originAddress}
+        searchedAddress={address => this.changeOrigin(address)}
+        origin={origin}
+        destination={destination}
+        center={origin}
+      />
     ) : (
       <></>
     );
@@ -126,33 +164,40 @@ class RequestTrip extends Component {
       <div className="RequestTrip">
         <Title>Solicitar Viaje</Title>
         <List>
-          <Card width={700}>{map}</Card>
-          <Grid>
-            <Card>
-              <p>Origen: Ubicación Actual</p>
-              <Select
-                title={"Destino"}
-                values={this.state.centrales}
-                onChange={value => this.changeDestination(value)}
-              />
-            </Card>
-            <Card>
-              <div>
+          <Card width={700} height={300}>
+            {map}
+          </Card>
+          <Card>
+            <Grid>
+              <List>
+                <Input
+                  type={"text"}
+                  name={"Origen"}
+                  placeholder={"Av. Gerza Sada #5798"}
+                  onChange={value => this.changeOriginAddress(value)}
+                />
+                <Select
+                  title={"Destino"}
+                  values={this.state.centrales}
+                  onChange={value => this.changeDestination(value)}
+                />
+                <Input
+                  type={"text"}
+                  name={"Hora"}
+                  placeholder={"2:00"}
+                  pattern={"hour"}
+                  linkName={"Formato 24hrs"}
+                  onChange={value => this.changeHour(value)}
+                />
+              </List>
+              <List>
                 <DayPicker
                   onDayClick={this.handleDayClick}
                   selectedDays={this.state.trip.day}
                 />
-              </div>
-              <Input
-                type={"text"}
-                name={"Hora"}
-                placeholder={"2:00"}
-                pattern={"hour"}
-                linkName={"Formato 24hrs"}
-                onChange={value => this.changeHour(value)}
-              />
-            </Card>
-          </Grid>
+              </List>
+            </Grid>
+          </Card>
           <Button onClick={this.sendRequest}>Enviar Solicitud</Button>
         </List>
       </div>

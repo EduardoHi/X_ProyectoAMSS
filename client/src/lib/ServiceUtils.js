@@ -92,7 +92,7 @@ export default class ServiceUtils {
     }
   }
 
-  static async authenticateCustomer() {
+  static async authenticateDriver() {
     try {
       const auth = await localforage.getItem("auth");
       if (auth && auth.token && auth.type === this.driver) return true;

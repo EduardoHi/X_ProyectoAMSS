@@ -74,7 +74,7 @@ export default class CustomerCard extends Component {
         <Card width={400}>
           <Grid firstColumnWidth={80}>
             <div className="CustomerProfileImageContainer">
-              <img />
+              <img alt={""} />
             </div>
             <div>{view}</div>
           </Grid>

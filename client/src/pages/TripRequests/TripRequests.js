@@ -3,9 +3,9 @@ import withRouter from "react-router-dom/withRouter";
 import "./TripRequests.css";
 
 import TripService from "../../services/trip.service";
-import Users from "../../components/layout/Users/Users";
 import Title from "../../components/layout/Title/Title";
 import Grid from "../../components/layout/Grid/Grid";
+import TripCard from "../../components/layout/TripCard/TripCard";
 
 class TripRequests extends Component {
   constructor(props) {
@@ -27,11 +27,28 @@ class TripRequests extends Component {
     }
   };
 
+  navigateToAssignDriver = tripId => {
+    this.props.history.push(`${this.props.match.url}/${tripId}`);
+  };
+
+  renderGrid = () => {
+    return this.state.trips.map((trip, i) => {
+      return (
+        <TripCard
+          trip={trip}
+          key={i}
+          onClick={() => this.navigateToAssignDriver(trip.id)}
+        />
+      );
+    });
+  };
+
   render() {
+    const grid = this.renderGrid();
     return (
       <div className="TripRequests">
         <Title>Solicitudes de Viaje</Title>
-        <Grid width={700} />
+        <Grid width={700}>{grid}</Grid>
       </div>
     );
   }

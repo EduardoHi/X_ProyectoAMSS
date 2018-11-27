@@ -13,6 +13,10 @@ router
 router.route(MODULE_PATH + "/request").get(tripController.getAllTripRequests);
 
 router
+  .route(MODULE_PATH + "/assign/:tripId")
+  .get(tripController.getTripWithDrivers);
+
+router
   .route(MODULE_PATH + "/:tripId")
   .get(tripController.getTrip)
   .put(tripController.updateTrip)

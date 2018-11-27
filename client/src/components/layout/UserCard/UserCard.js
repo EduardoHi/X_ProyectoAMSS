@@ -7,7 +7,7 @@ function UserCard(props) {
     <div className="UserCard" onClick={props.onClick}>
       <Card padding={8} borderRadius={8}>
         <div className="UserCardLeft">
-          <img src={props.image} />
+          <img src={props.image} alt={""} />
           <p>{props.name}</p>
         </div>
         <p>{props.email}</p>

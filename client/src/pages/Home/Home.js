@@ -13,6 +13,7 @@ import Driver from "../Driver/Driver";
 import Profile from "../Profile/Profile";
 import TripRequests from "../TripRequests/TripRequests";
 import RequestTrip from "../RequestTrip/RequestTrip";
+import TripAssignDriver from "../TripAssignDriver/TripAssignDriver";
 
 class Home extends Component {
   constructor(props) {
@@ -163,6 +164,15 @@ class Home extends Component {
               path={`${this.props.match.url}/trip-requests`}
               render={() => (
                 <TripRequests
+                  alert={async data => this.props.alert(data)}
+                  loading={loading => this.props.loading(loading)}
+                />
+              )}
+            />
+            <Route
+              path={`${this.props.match.url}/trip-requests/:tripId`}
+              render={() => (
+                <TripAssignDriver
                   alert={async data => this.props.alert(data)}
                   loading={loading => this.props.loading(loading)}
                 />

@@ -1,0 +1,27 @@
+.TripCard {
+  transition: transform 0.1s;
+}
+
+.TripCard:hover {
+  cursor: pointer;
+  transform: scale(1.0125);
+}
+
+.TripCard .UserInformation {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.TripCard .UserInformation p {
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+.TripCard .UserInformation img {
+  height: 32px;
+  width: 32px;
+  background: lightgray;
+  border-radius: 100%;
+}

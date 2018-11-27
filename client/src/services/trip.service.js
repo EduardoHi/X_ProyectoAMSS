@@ -29,6 +29,18 @@ export default class TripService {
     }
   }
 
+  static async getTripWithDrivers(tripId) {
+    try {
+      const res = await axios.get(
+        MODULE_PATH + "/assign/" + tripId,
+        await ServiceUtils.getHeader()
+      );
+      return ServiceUtils.extractData(res);
+    } catch (err) {
+      throw ServiceUtils.handleError(err);
+    }
+  }
+
   static async update(id, trip) {
     try {
       const res = await axios.put(

@@ -1,14 +1,17 @@
 import React from "react";
 import "./Select.css";
-import Button from "../Button/Button";
 
 function Select(props) {
   return (
     <div className="Select">
       <p>{props.title}</p>
-      <select onChange={event => props.onChange(event.target.value)}>
+      <select
+        onChange={event => props.onChange(event.target.value)}
+        defaulvalue={{ lat: null, lng: null }}
+      >
+        <option value={{ lat: null, lng: null }}>Seleccionar</option>
         {props.values &&
-          props.values.map((val, i) => <option>{val.name}</option>)}
+          props.values.map((val, i) => <option key={i}>{val.name}</option>)}
       </select>
     </div>
   );

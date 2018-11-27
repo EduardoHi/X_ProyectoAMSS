@@ -165,7 +165,7 @@ export default class DriverCard extends Component {
       <Card width={700}>
         <Grid firstColumnWidth={80}>
           <div className="CustomerProfileImageContainer">
-            <img />
+            <img alt={""} />
           </div>
           <div>{view}</div>
         </Grid>
