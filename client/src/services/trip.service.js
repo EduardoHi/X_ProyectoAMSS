@@ -4,6 +4,18 @@ import ServiceUtils from "../lib/ServiceUtils";
 
 const MODULE_PATH = Config.apiURL() + "/trip";
 export default class TripService {
+  static async get(id) {
+    try {
+      const res = await axios.get(
+        MODULE_PATH + "/" + id,
+        await ServiceUtils.getHeader()
+      );
+      return ServiceUtils.extractData(res);
+    } catch (err) {
+      throw ServiceUtils.handleError(err);
+    }
+  }
+
   static async request(trip) {
     try {
       const res = await axios.post(
@@ -17,7 +29,7 @@ export default class TripService {
     }
   }
 
-  static async getAllRequest(trip) {
+  static async getAllRequest() {
     try {
       const res = await axios.get(
         MODULE_PATH + "/request",
@@ -33,6 +45,30 @@ export default class TripService {
     try {
       const res = await axios.get(
         MODULE_PATH + "/assign/" + tripId,
+        await ServiceUtils.getHeader()
+      );
+      return ServiceUtils.extractData(res);
+    } catch (err) {
+      throw ServiceUtils.handleError(err);
+    }
+  }
+
+  static async getAllCustomerAccepted() {
+    try {
+      const res = await axios.get(
+        MODULE_PATH + "/customer-accepted",
+        await ServiceUtils.getHeader()
+      );
+      return ServiceUtils.extractData(res);
+    } catch (err) {
+      throw ServiceUtils.handleError(err);
+    }
+  }
+
+  static async getAllDriverAccepted() {
+    try {
+      const res = await axios.get(
+        MODULE_PATH + "/driver-accepted",
         await ServiceUtils.getHeader()
       );
       return ServiceUtils.extractData(res);

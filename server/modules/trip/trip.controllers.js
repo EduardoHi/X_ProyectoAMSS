@@ -15,7 +15,31 @@ async function createTrip(req, res) {
 
 async function getAllTripRequests(req, res) {
   try {
-    const trips = await TripAccess.getAllTripsWhere({ status: "requested" });
+    const trips = await TripAccess.getAllRequestedTrips();
+    res.send(trips);
+  } catch (err) {
+    console.error(err);
+    res.status(400).send(err);
+  }
+}
+
+async function getAllCustomerAcceptedAndStartedTrips(req, res) {
+  try {
+    const trips = await TripAccess.getAllAcceptedAndStartedCustomerTrips(
+      req.user.id
+    );
+    res.send(trips);
+  } catch (err) {
+    console.error(err);
+    res.status(400).send(err);
+  }
+}
+
+async function getAllDriverAcceptedAndStartedTrips(req, res) {
+  try {
+    const trips = await TripAccess.getAllAcceptedAndStartedDriverTrips(
+      req.user.id
+    );
     res.send(trips);
   } catch (err) {
     console.error(err);
@@ -95,6 +119,8 @@ module.exports = {
   createTrip,
   getAllTrips,
   getAllTripRequests,
+  getAllCustomerAcceptedAndStartedTrips,
+  getAllDriverAcceptedAndStartedTrips,
   getTrip,
   getTripWithDrivers,
   updateTrip,

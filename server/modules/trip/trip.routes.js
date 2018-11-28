@@ -17,6 +17,14 @@ router
   .get(tripController.getTripWithDrivers);
 
 router
+  .route(MODULE_PATH + "/driver-accepted")
+  .get(tripController.getAllDriverAcceptedAndStartedTrips);
+
+router
+  .route(MODULE_PATH + "/customer-accepted")
+  .get(tripController.getAllCustomerAcceptedAndStartedTrips);
+
+router
   .route(MODULE_PATH + "/:tripId")
   .get(tripController.getTrip)
   .put(tripController.updateTrip)

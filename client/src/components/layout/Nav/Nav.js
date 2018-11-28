@@ -29,8 +29,9 @@ class Nav extends Component {
 
   renderPages = pages => {
     return pages.map((page, i) => {
+      const link = page.type ? page.link + "/" + page.type : page.link;
       return (
-        <NavLink key={i} to={page.link}>
+        <NavLink key={i} to={link}>
           {page.name}
         </NavLink>
       );

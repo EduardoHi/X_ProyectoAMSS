@@ -10,7 +10,6 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker,
   DirectionsRenderer
 } from "react-google-maps";
 
@@ -60,9 +59,31 @@ const CoreMap = compose(
         }
       );
     },
-
+    getAddress(location, returnFunc) {
+      const Geocoder = new window.google.maps.Geocoder();
+      Geocoder.geocode({ location }, (result, status) => {
+        if (status === window.google.maps.DirectionsStatus.OK) {
+          returnFunc(result[0].formatted_address);
+        } else {
+          console.error(`error fetching directions ${result}`);
+        }
+      });
+    },
+    calcAddresses() {
+      const origin = new window.google.maps.LatLng(
+        this.props.markers[0].lat,
+        this.props.markers[0].lng
+      );
+      const destination = new window.google.maps.LatLng(
+        this.props.markers[1].lat,
+        this.props.markers[1].lng
+      );
+      this.getAddress(origin, this.props.searchedOriginAddress);
+      this.getAddress(destination, this.props.searchedDestinationAddress);
+    },
     componentDidMount() {
       this.calcRoute();
+      if (this.props.markers.length >= 2) this.calcAddresses();
     },
     componentDidUpdate(prevProps) {
       if (this.props.markers !== prevProps.markers) {
@@ -104,6 +125,10 @@ export default function Map(props) {
   if (props.destination) locations = [...locations, props.destination];
   return (
     <CoreMap
+      searchedOriginAddress={data => props.searchedOriginAddress(data)}
+      searchedDestinationAddress={data =>
+        props.searchedDestinationAddress(data)
+      }
       originAddress={props.originAddress}
       searchedAddress={address => props.searchedAddress(address)}
       markers={locations}

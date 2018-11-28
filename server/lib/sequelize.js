@@ -29,7 +29,9 @@ if (dropAndCreate) {
     .then(() => {
       require("../lib/dataInit");
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+      console.error(err);
+    });
 }
 
 module.exports = sequelizeConnection;

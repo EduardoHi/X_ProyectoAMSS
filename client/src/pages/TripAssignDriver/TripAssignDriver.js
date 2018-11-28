@@ -43,7 +43,6 @@ class TripAssignDriver extends Component {
     };
     try {
       this.props.loading(true);
-      console.log(trip);
       await TripService.update(trip.id, trip);
       this.props.alert({
         error: false,
@@ -76,9 +75,7 @@ class TripAssignDriver extends Component {
     const grid = this.renderGrid();
     return (
       <div className="TripAssignDriver">
-        <Title withBackButton={true} onClick={() => this.changeViewMode({})}>
-          Asignar Conductor a Viaje
-        </Title>
+        <Title withBackButton={true}>Asignar Conductor a Viaje</Title>
         <Grid width={700}>{grid}</Grid>
       </div>
     );

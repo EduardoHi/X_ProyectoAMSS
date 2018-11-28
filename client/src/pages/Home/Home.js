@@ -11,7 +11,8 @@ import Drivers from "../Drivers/Drivers";
 import Customer from "../Customer/Customer";
 import Driver from "../Driver/Driver";
 import Profile from "../Profile/Profile";
-import TripRequests from "../TripRequests/TripRequests";
+import Trips from "../Trips/Trips";
+import Trip from "../Trip/Trip";
 import RequestTrip from "../RequestTrip/RequestTrip";
 import TripAssignDriver from "../TripAssignDriver/TripAssignDriver";
 
@@ -31,8 +32,9 @@ class Home extends Component {
       ],
       adminBottomPages: [
         {
-          link: `${this.props.match.url}/trip-requests`,
-          name: "Solicitudes de Viaje"
+          link: `${this.props.match.url}/trips`,
+          name: "Solicitudes de Viaje",
+          type: "requested"
         },
         { link: `${this.props.match.url}/history`, name: "Historial" },
         { link: `${this.props.match.url}/configuration`, name: "Configuración" }
@@ -41,12 +43,21 @@ class Home extends Component {
         {
           link: `${this.props.match.url}/request-trip`,
           name: "Solicitar Viaje"
+        },
+        {
+          link: `${this.props.match.url}/trips`,
+          name: "Mis Viajes",
+          type: "accepted-customer"
         }
       ],
-      customerBottomPages: [
-        { link: `${this.props.match.url}/configuration`, name: "Configuración" }
+      customerBottomPages: [],
+      driverTopPages: [
+        {
+          link: `${this.props.match.url}/trips`,
+          name: "Mis Viajes",
+          type: "accepted-driver"
+        }
       ],
-      driverTopPages: [],
       driverBottomPages: []
     };
   }
@@ -163,16 +174,31 @@ class Home extends Component {
             />
             <Route
               exact
-              path={`${this.props.match.url}/trip-requests`}
+              path={`${this.props.match.url}/trips/:type`}
               render={() => (
-                <TripRequests
+                <Trips
+                  titles={{
+                    requested: "Solicitudes de Viaje",
+                    "accepted-customer": "Mis Viajes",
+                    "accepted-driver": "Mis Viajes"
+                  }}
                   alert={async data => this.props.alert(data)}
                   loading={loading => this.props.loading(loading)}
                 />
               )}
             />
             <Route
-              path={`${this.props.match.url}/trip-requests/:tripId`}
+              exact
+              path={`${this.props.match.url}/trips/:type/:tripId/`}
+              render={() => (
+                <Trip
+                  alert={async data => this.props.alert(data)}
+                  loading={loading => this.props.loading(loading)}
+                />
+              )}
+            />
+            <Route
+              path={`${this.props.match.url}/trips/:type/assign/:tripId`}
               render={() => (
                 <TripAssignDriver
                   alert={async data => this.props.alert(data)}

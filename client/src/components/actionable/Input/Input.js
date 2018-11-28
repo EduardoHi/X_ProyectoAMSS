@@ -47,6 +47,7 @@ export default class Input extends Component {
           placeholder={this.props.placeholder}
           onChange={this.onChange}
           pattern={patterns[this.props.pattern]}
+          disabled={this.props.disabled}
         />
         {textFields}
       </div>

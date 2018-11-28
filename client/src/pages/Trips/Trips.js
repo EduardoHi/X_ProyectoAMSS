@@ -1,24 +1,31 @@
 import React, { Component } from "react";
 import withRouter from "react-router-dom/withRouter";
-import "./TripRequests.css";
+import "./Trips.css";
 
 import TripService from "../../services/trip.service";
 import Title from "../../components/layout/Title/Title";
 import Grid from "../../components/layout/Grid/Grid";
 import TripCard from "../../components/layout/TripCard/TripCard";
 
-class TripRequests extends Component {
+class Trips extends Component {
   constructor(props) {
     super(props);
+    const type = props.match.params.type;
     this.state = {
-      trips: []
+      trips: [],
+      type,
+      services: {
+        requested: TripService.getAllRequest,
+        "accepted-driver": TripService.getAllDriverAccepted,
+        "accepted-customer": TripService.getAllCustomerAccepted
+      }
     };
   }
 
   componentDidMount = async () => {
     try {
       this.props.loading(true);
-      const trips = await TripService.getAllRequest();
+      const trips = await this.state.services[this.state.type]();
       this.setState({ trips });
     } catch (err) {
       this.props.alert({ error: true, message: err.display });
@@ -27,8 +34,15 @@ class TripRequests extends Component {
     }
   };
 
-  navigateToAssignDriver = tripId => {
-    this.props.history.push(`${this.props.match.url}/${tripId}`);
+  nagivate = tripId => {
+    switch (this.state.type) {
+      case "requested":
+        this.props.history.push(`${this.props.match.url}/assign/${tripId}`);
+        break;
+      default:
+        this.props.history.push(`${this.props.match.url}/${tripId}`);
+        break;
+    }
   };
 
   renderGrid = () => {
@@ -36,8 +50,9 @@ class TripRequests extends Component {
       return (
         <TripCard
           trip={trip}
+          displayDriver={this.state.type === "accepted-customer"}
           key={i}
-          onClick={() => this.navigateToAssignDriver(trip.id)}
+          onClick={() => this.nagivate(trip.id)}
         />
       );
     });
@@ -46,12 +61,12 @@ class TripRequests extends Component {
   render() {
     const grid = this.renderGrid();
     return (
-      <div className="TripRequests">
-        <Title>Solicitudes de Viaje</Title>
+      <div className="Trips">
+        <Title>{this.props.titles[this.state.type]}</Title>
         <Grid width={700}>{grid}</Grid>
       </div>
     );
   }
 }
 
-export default withRouter(TripRequests);
+export default withRouter(Trips);

@@ -12,16 +12,49 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 }
 
 .TripCard .UserInformation p {
-  margin-left: 8px;
   font-weight: 600;
+  width: 80%;
 }
 
-.TripCard .UserInformation img {
+.TripCard .UserInformation div {
+  display: flex;
+  justify-content: space-around;
+  width: 20%;
+}
+
+.TripCard .UserInformation div img {
   height: 32px;
   width: 32px;
   background: lightgray;
   border-radius: 100%;
+}
+
+.TripCard .TripInformation {
+  padding-top: 8px;
+}
+
+.TripCard .TripInformation div {
+  display: flex;
+  margin-bottom: 8px;
+}
+.TripCard .TripInformation p:first-of-type {
+  width: 20%;
+  font-weight: 600;
+  text-align: center;
+}
+.TripCard .TripInformation p:last-of-type {
+  width: 80%;
+}
+.TripCard .TripInformation p {
+  margin: 0;
+}
+
+.TripCard .TripStarted {
+  margin-left: 20%;
+  font-weight: 600;
+  color: rgb(53, 92, 186);
 }
