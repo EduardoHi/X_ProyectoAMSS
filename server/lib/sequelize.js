@@ -25,11 +25,27 @@ sequelizeConnection
 
 if (dropAndCreate) {
   sequelizeConnection
-    .sync({ force: dropAndCreate })
-    .then(() => {
-      require("../lib/dataInit");
+    .query("SET FOREIGN_KEY_CHECKS = 0")
+    .then(function() {
+      sequelizeConnection
+        .sync({
+          force: dropAndCreate
+        })
+        .then(() => {
+          require("../lib/dataInit");
+        })
+        .then(function() {
+          sequelizeConnection
+            .query("SET FOREIGN_KEY_CHECKS = 1")
+            .then(function() {
+              console.log("Database Dropped and Created.");
+            });
+        })
+        .catch(function(err) {
+          console.error(err);
+        });
     })
-    .catch(err => {
+    .catch(function(ee) {
       console.error(err);
     });
 }

@@ -1,3 +1,4 @@
-.Trip .BottomAcceptButton {
+.Trip > .List > .BottomButtons {
   display: flex;
+  justify-content: space-between;
 }

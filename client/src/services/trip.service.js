@@ -77,6 +77,30 @@ export default class TripService {
     }
   }
 
+  static async getCustomerHistory() {
+    try {
+      const res = await axios.get(
+        MODULE_PATH + "/customer-history",
+        await ServiceUtils.getHeader()
+      );
+      return ServiceUtils.extractData(res);
+    } catch (err) {
+      throw ServiceUtils.handleError(err);
+    }
+  }
+
+  static async getDriverHistory() {
+    try {
+      const res = await axios.get(
+        MODULE_PATH + "/driver-history",
+        await ServiceUtils.getHeader()
+      );
+      return ServiceUtils.extractData(res);
+    } catch (err) {
+      throw ServiceUtils.handleError(err);
+    }
+  }
+
   static async update(id, trip) {
     try {
       const res = await axios.put(

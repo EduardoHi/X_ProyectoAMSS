@@ -41,27 +41,33 @@ async function getAllRequestedTrips() {
   );
 }
 
-async function getAllAcceptedAndStartedCustomerTrips(userId) {
+async function getAllCustomerTripsWithStatus(userId, status, order) {
+  const statusOr = status.map(s => {
+    return { status: s };
+  });
   return await accessWithTry(
     Trip.findAll({
       where: {
-        [Op.or]: [{ status: "started" }, { status: "accepted" }],
+        [Op.or]: statusOr,
         userId: userId
       },
-      order: [["status", "DESC"]],
+      order: [[order, "DESC"]],
       include: includeDriverAndUser
     })
   );
 }
 
-async function getAllAcceptedAndStartedDriverTrips(userId) {
+async function getAllDriverTripsWithStatus(userId, status, order) {
+  const statusOr = status.map(s => {
+    return { status: s };
+  });
   return await accessWithTry(
     Trip.findAll({
       where: {
-        [Op.or]: [{ status: "started" }, { status: "accepted" }],
+        [Op.or]: statusOr,
         driverId: userId
       },
-      order: [["status", "DESC"]],
+      order: [[order, "DESC"]],
       include: includeDriverAndUser
     })
   );
@@ -82,8 +88,8 @@ module.exports = {
   updateTrip,
   getAllTrips,
   getAllRequestedTrips,
-  getAllAcceptedAndStartedCustomerTrips,
-  getAllAcceptedAndStartedDriverTrips,
+  getAllCustomerTripsWithStatus,
+  getAllDriverTripsWithStatus,
   findById,
   deleteTrip
 };

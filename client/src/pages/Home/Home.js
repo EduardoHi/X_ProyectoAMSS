@@ -50,7 +50,13 @@ class Home extends Component {
           type: "accepted-customer"
         }
       ],
-      customerBottomPages: [],
+      customerBottomPages: [
+        {
+          link: `${this.props.match.url}/trips`,
+          name: "Historial",
+          type: "history-customer"
+        }
+      ],
       driverTopPages: [
         {
           link: `${this.props.match.url}/trips`,
@@ -58,7 +64,13 @@ class Home extends Component {
           type: "accepted-driver"
         }
       ],
-      driverBottomPages: []
+      driverBottomPages: [
+        {
+          link: `${this.props.match.url}/trips`,
+          name: "Historial",
+          type: "history-driver"
+        }
+      ]
     };
   }
 
@@ -180,7 +192,9 @@ class Home extends Component {
                   titles={{
                     requested: "Solicitudes de Viaje",
                     "accepted-customer": "Mis Viajes",
-                    "accepted-driver": "Mis Viajes"
+                    "accepted-driver": "Mis Viajes",
+                    "history-customer": "Historial",
+                    "history-driver": "Historial"
                   }}
                   alert={async data => this.props.alert(data)}
                   loading={loading => this.props.loading(loading)}

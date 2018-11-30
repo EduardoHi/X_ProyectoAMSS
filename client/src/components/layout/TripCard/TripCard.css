@@ -58,3 +58,9 @@
   font-weight: 600;
   color: rgb(53, 92, 186);
 }
+
+.TripCard .TripCanceled {
+  margin-left: 20%;
+  font-weight: 600;
+  color: red;
+}

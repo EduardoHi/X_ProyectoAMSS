@@ -25,6 +25,14 @@ router
   .get(tripController.getAllCustomerAcceptedAndStartedTrips);
 
 router
+  .route(MODULE_PATH + "/customer-history")
+  .get(tripController.getCustomerHistory);
+
+router
+  .route(MODULE_PATH + "/driver-history")
+  .get(tripController.getDriverHistory);
+
+router
   .route(MODULE_PATH + "/:tripId")
   .get(tripController.getTrip)
   .put(tripController.updateTrip)

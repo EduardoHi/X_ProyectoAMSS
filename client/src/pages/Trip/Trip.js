@@ -9,6 +9,7 @@ import List from "../../components/layout/List/List";
 import Card from "../../components/layout/Card/Card";
 
 import Button from "../../components/actionable/Button/Button";
+import DeleteButton from "../../components/actionable/DeleteButton/DeleteButton";
 import Input from "../../components/actionable/Input/Input";
 import Map from "../../components/actionable/Map/Map";
 
@@ -143,14 +144,38 @@ class Trip extends Component {
 
   renderButton = () => {
     const { status } = this.state.trip;
-    if (this.state.type === "accepted-customer") return <></>;
-    else if (status === "accepted") {
+    if (this.state.type === "accepted-customer") {
+      if (status === "accepted") {
+        return (
+          <div className="BottomButtons">
+            <DeleteButton onClick={() => this.updateTrip("canceled")} />
+          </div>
+        );
+      } else {
+        return <></>;
+      }
+    } else if (status === "accepted") {
       return (
-        <Button onClick={() => this.updateTrip("started")}>Iniciar</Button>
+        <div className="BottomButtons">
+          <DeleteButton onClick={() => this.updateTrip("canceled")} />
+          <Button
+            style={{ width: "auto" }}
+            onClick={() => this.updateTrip("started")}
+          >
+            Iniciar
+          </Button>
+        </div>
       );
     } else if (status === "started") {
       return (
-        <Button onClick={() => this.updateTrip("finished")}>Terminar</Button>
+        <div className="BottomButtons" style={{ flexDirection: "row-reverse" }}>
+          <Button
+            style={{ width: "auto" }}
+            onClick={() => this.updateTrip("finished")}
+          >
+            Terminar
+          </Button>
+        </div>
       );
     }
     return <></>;
@@ -168,7 +193,7 @@ class Trip extends Component {
             {map}
           </Card>
           <Card>{data}</Card>
-          <div className="BottomAcceptButton">{buttons}</div>
+          {buttons}
         </List>
       </div>
     );

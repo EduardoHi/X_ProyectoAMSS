@@ -16,21 +16,38 @@ class Trips extends Component {
       type,
       services: {
         requested: TripService.getAllRequest,
+        "accepted-customer": TripService.getAllCustomerAccepted,
         "accepted-driver": TripService.getAllDriverAccepted,
-        "accepted-customer": TripService.getAllCustomerAccepted
+        "history-customer": TripService.getCustomerHistory,
+        "history-driver": TripService.getDriverHistory
       }
     };
   }
 
-  componentDidMount = async () => {
+  tripsService = async type => {
     try {
       this.props.loading(true);
-      const trips = await this.state.services[this.state.type]();
+      const trips = await this.state.services[type]();
       this.setState({ trips });
     } catch (err) {
       this.props.alert({ error: true, message: err.display });
     } finally {
       this.props.loading(false);
+    }
+  };
+
+  componentDidMount = async () => {
+    this.tripsService(this.state.type);
+  };
+
+  componentDidUpdate = async prevProps => {
+    if (prevProps.match.params.type !== this.props.match.params.type) {
+      const { type } = this.props.match.params;
+      this.setState({
+        ...this.state,
+        type
+      });
+      this.tripsService(type);
     }
   };
 
@@ -50,7 +67,10 @@ class Trips extends Component {
       return (
         <TripCard
           trip={trip}
-          displayDriver={this.state.type === "accepted-customer"}
+          displayDriver={
+            this.state.type === "accepted-customer" ||
+            this.state.type === "history-customer"
+          }
           key={i}
           onClick={() => this.nagivate(trip.id)}
         />

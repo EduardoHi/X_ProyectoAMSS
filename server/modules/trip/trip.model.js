@@ -43,7 +43,7 @@ const TripSchema = {
   },
   status: {
     type: Sequelize.ENUM,
-    values: ["requested", "accepted", "started", "finished"],
+    values: ["requested", "accepted", "started", "finished", "canceled"],
     allowNull: false
   },
   date: {

@@ -25,8 +25,10 @@ async function getAllTripRequests(req, res) {
 
 async function getAllCustomerAcceptedAndStartedTrips(req, res) {
   try {
-    const trips = await TripAccess.getAllAcceptedAndStartedCustomerTrips(
-      req.user.id
+    const trips = await TripAccess.getAllCustomerTripsWithStatus(
+      req.user.id,
+      ["accepted", "started"],
+      "status"
     );
     res.send(trips);
   } catch (err) {
@@ -37,8 +39,38 @@ async function getAllCustomerAcceptedAndStartedTrips(req, res) {
 
 async function getAllDriverAcceptedAndStartedTrips(req, res) {
   try {
-    const trips = await TripAccess.getAllAcceptedAndStartedDriverTrips(
-      req.user.id
+    const trips = await TripAccess.getAllDriverTripsWithStatus(
+      req.user.id,
+      ["accepted", "started"],
+      "status"
+    );
+    res.send(trips);
+  } catch (err) {
+    console.error(err);
+    res.status(400).send(err);
+  }
+}
+
+async function getCustomerHistory(req, res) {
+  try {
+    const trips = await TripAccess.getAllCustomerTripsWithStatus(
+      req.user.id,
+      ["finished", "canceled"],
+      "date"
+    );
+    res.send(trips);
+  } catch (err) {
+    console.error(err);
+    res.status(400).send(err);
+  }
+}
+
+async function getDriverHistory(req, res) {
+  try {
+    const trips = await TripAccess.getAllDriverTripsWithStatus(
+      req.user.id,
+      ["finished", "canceled"],
+      "date"
     );
     res.send(trips);
   } catch (err) {
@@ -123,6 +155,8 @@ module.exports = {
   getAllDriverAcceptedAndStartedTrips,
   getTrip,
   getTripWithDrivers,
+  getCustomerHistory,
+  getDriverHistory,
   updateTrip,
   deleteTrip,
   getTripById

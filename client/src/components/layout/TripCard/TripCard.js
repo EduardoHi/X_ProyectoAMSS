@@ -37,17 +37,29 @@ class TripCard extends Component {
     );
   };
 
+  renderTripStatus = () => {
+    const { status } = this.props.trip;
+    switch (status) {
+      case "started":
+        return <p className="TripStarted">Viaje en Curso</p>;
+      case "canceled":
+        return <p className="TripCanceled">Viaje Cancelado</p>;
+      default:
+        return <></>;
+    }
+  };
+
   render() {
     const {
       originLat,
       originLng,
       destinationLat,
       destinationLng,
-      date,
-      status
+      date
     } = this.props.trip;
 
     const userInfo = this.renderUserInfo();
+    const tripStatus = this.renderTripStatus();
 
     return (
       <div className="TripCard" onClick={this.props.onClick}>
@@ -80,11 +92,7 @@ class TripCard extends Component {
               <p>{date}</p>
             </div>
           </div>
-          {status === "started" ? (
-            <p className="TripStarted">Viaje en Curso</p>
-          ) : (
-            <></>
-          )}
+          {tripStatus}
         </Card>
       </div>
     );
